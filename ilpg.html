@@ -1,26 +1,29 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#06110e">
-  <meta name="description" content="Leviz PG — artista urbano independiente de Cuba. Música, historia y todas sus plataformas oficiales.">
+  <meta name="theme-color" content="#030806">
+  <meta name="description" content="Leviz PG — artista urbano independiente de Cuba. Música, historia y plataformas oficiales.">
   <title>levizpg | El que le da la suerte al trébol 🍀</title>
 
   <style>
     :root {
       --bg: #030806;
-      --green: #0b8b68;
+      --green: #087b5b;
       --teal: #18c6a0;
       --mint: #83ffe0;
       --white: #f1fff9;
       --muted: #9aafa7;
-      --panel: rgba(12, 29, 24, .72);
-      --border: rgba(100, 255, 206, .15);
+      --panel: rgba(12, 29, 24, .78);
+      --border: rgba(100, 255, 206, .16);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     html { scroll-behavior: smooth; }
 
@@ -32,18 +35,20 @@
       line-height: 1.7;
     }
 
-    a { color: inherit; text-decoration: none; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-    /* Fondo verde marino concentrado en el centro */
     .background-glow {
       position: fixed;
       inset: 0;
       z-index: -3;
       pointer-events: none;
       background:
-        radial-gradient(ellipse at 50% 37%,
-          rgba(7, 119, 86, .38) 0%,
-          rgba(5, 72, 57, .22) 28%,
+        radial-gradient(ellipse at 50% 38%,
+          rgba(7, 119, 86, .40) 0%,
+          rgba(5, 72, 57, .24) 27%,
           rgba(3, 20, 16, .55) 55%,
           #030806 82%);
     }
@@ -53,39 +58,43 @@
       inset: 0;
       z-index: -1;
       pointer-events: none;
-      opacity: .12;
+      opacity: .10;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
     }
 
-    /* Trébol SVG hecho en el propio HTML.
-       Cada pétalo gira alrededor de su propia base.
-       El tallo permanece fijo. */
+    /* Trébol de cuatro hojas dibujado con SVG */
     .clover-bg {
       position: fixed;
-      width: min(83vw, 760px);
-      height: min(83vw, 760px);
+      width: min(82vw, 740px);
+      height: min(82vw, 740px);
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       z-index: -2;
       pointer-events: none;
-      opacity: .105;
+      opacity: .12;
       filter: drop-shadow(0 0 35px rgba(25, 220, 157, .2));
+      overflow: visible;
     }
 
+    /*
+      Cada hoja gira alrededor de su propio punto de unión.
+      El tallo es independiente y permanece fijo.
+    */
     .petal {
       transform-box: view-box;
       transform-origin: 200px 200px;
-      animation: petalSpin 24s linear infinite;
+      animation: petalSpin 28s linear infinite;
     }
 
-    .petal:nth-child(2) { animation-delay: -6s; }
-    .petal:nth-child(3) { animation-delay: -12s; }
-    .petal:nth-child(4) { animation-delay: -18s; }
+    .petal-1 { transform-origin: 200px 200px; }
+    .petal-2 { transform-origin: 200px 200px; }
+    .petal-3 { transform-origin: 200px 200px; }
+    .petal-4 { transform-origin: 200px 200px; }
 
     @keyframes petalSpin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+      from { rotate: 0deg; }
+      to { rotate: 360deg; }
     }
 
     .site-header {
@@ -145,7 +154,8 @@
       margin-bottom: 22px;
     }
 
-    .eyebrow::before, .eyebrow::after {
+    .eyebrow::before,
+    .eyebrow::after {
       content: "";
       width: 24px;
       height: 1px;
@@ -158,7 +168,13 @@
       font-weight: 1000;
       letter-spacing: -.085em;
       text-transform: lowercase;
-      background: linear-gradient(135deg, #f2fff9 12%, #9bffe1 42%, #15c99a 72%, #08704f);
+      background: linear-gradient(
+        135deg,
+        #f2fff9 12%,
+        #9bffe1 42%,
+        #15c99a 72%,
+        #08704f
+      );
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -265,8 +281,13 @@
       max-width: 650px;
     }
 
-    .story-card, .info-card {
-      background: linear-gradient(145deg, rgba(15, 39, 31, .88), rgba(5, 17, 13, .9));
+    .story-card,
+    .info-card {
+      background: linear-gradient(
+        145deg,
+        rgba(15, 39, 31, .88),
+        rgba(5, 17, 13, .92)
+      );
       border: 1px solid var(--border);
       border-radius: 18px;
       padding: clamp(22px, 5vw, 44px);
@@ -283,7 +304,7 @@
 
     .story-card strong { color: var(--white); }
 
-    .story-card .story-highlight {
+    .story-highlight {
       margin-top: 28px;
       padding: 20px;
       border-left: 3px solid var(--teal);
@@ -467,7 +488,6 @@
       font-weight: 800;
     }
 
-    /* Aparición suave al desplazarse */
     .reveal {
       opacity: 0;
       transform: translateY(22px);
@@ -501,9 +521,14 @@
         padding: 80px 0 60px;
       }
 
-      .platform-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .platform-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .info-layout { grid-template-columns: 1fr; }
+
       section.content-section { padding: 58px 0; }
+
       .scroll-hint { margin-top: 43px; }
 
       footer {
@@ -534,68 +559,80 @@
   <div class="background-glow"></div>
   <div class="noise"></div>
 
-  <!-- Trébol dibujado con SVG: no requiere archivos de imagen -->
-  <svg class="clover-bg" viewBox="0 0 400 400" fill="none"
-       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <!-- Trébol de cuatro hojas, sin imágenes externas -->
+  <svg class="clover-bg"
+       viewBox="0 0 400 400"
+       xmlns="http://www.w3.org/2000/svg"
+       aria-hidden="true">
+
     <defs>
-      <linearGradient id="cloverGradient" x1="40" y1="20" x2="350" y2="380"
+      <linearGradient id="cloverGradient"
+                      x1="80" y1="40" x2="320" y2="360"
                       gradientUnits="userSpaceOnUse">
-        <stop stop-color="#65FFD0"/>
-        <stop offset="0.5" stop-color="#12C995"/>
+        <stop stop-color="#75FFD8"/>
+        <stop offset=".55" stop-color="#16C995"/>
         <stop offset="1" stop-color="#08734D"/>
       </linearGradient>
     </defs>
 
-    <!-- Cuatro pétalos independientes -->
-    <g class="petal">
+    <!-- Hoja superior -->
+    <g class="petal petal-1">
       <path d="M200 200
-               C164 182 128 145 137 102
-               C144 68 182 54 200 91
-               C218 54 256 68 263 102
-               C272 145 236 182 200 200Z"
-            fill="url(#cloverGradient)"/>
-    </g>
-    <g class="petal">
-      <path d="M200 200
-               C164 182 128 145 137 102
-               C144 68 182 54 200 91
-               C218 54 256 68 263 102
-               C272 145 236 182 200 200Z"
-            fill="url(#cloverGradient)"
-            transform="rotate(90 200 200)"/>
-    </g>
-    <g class="petal">
-      <path d="M200 200
-               C164 182 128 145 137 102
-               C144 68 182 54 200 91
-               C218 54 256 68 263 102
-               C272 145 236 182 200 200Z"
-            fill="url(#cloverGradient)"
-            transform="rotate(180 200 200)"/>
-    </g>
-    <g class="petal">
-      <path d="M200 200
-               C164 182 128 145 137 102
-               C144 68 182 54 200 91
-               C218 54 256 68 263 102
-              C272 145 236 182 200 200Z"
-            fill="url(#cloverGradient)"
-            transform="rotate(270 200 200)"/>
+        C177 184 133 159 139 118
+        C145 78 183 72 200 108
+        C217 72 255 78 261 118
+        C267 159 223 184 200 200Z"
+        fill="url(#cloverGradient)"/>
     </g>
 
-    <!-- Tallo fijo: no tiene ninguna animación -->
-    <path d="M200 192
-             C199 230 222 269 251 302
-             C263 315 275 325 287 332
-             L272 347
-             C230 319 204 286 191 250
-             C182 228 182 209 185 193Z"
-          fill="url(#cloverGradient)"/>
-    <circle cx="200" cy="200" r="7" fill="#A5FFE5"/>
+    <!-- Hoja derecha -->
+    <g class="petal petal-2">
+      <path d="M200 200
+        C177 184 133 159 139 118
+        C145 78 183 72 200 108
+        C217 72 255 78 261 118
+        C267 159 223 184 200 200Z"
+        fill="url(#cloverGradient)"
+        transform="rotate(90 200 200)"/>
+    </g>
+
+    <!-- Hoja inferior -->
+    <g class="petal petal-3">
+      <path d="M200 200
+        C177 184 133 159 139 118
+        C145 78 183 72 200 108
+        C217 72 255 78 261 118
+        C267 159 223 184 200 200Z"
+        fill="url(#cloverGradient)"
+        transform="rotate(180 200 200)"/>
+    </g>
+
+    <!-- Hoja izquierda -->
+    <g class="petal petal-4">
+      <path d="M200 200
+        C177 184 133 159 139 118
+        C145 78 183 72 200 108
+        C217 72 255 78 261 118
+        C267 159 223 184 200 200Z"
+        fill="url(#cloverGradient)"
+        transform="rotate(270 200 200)"/>
+    </g>
+
+    <!-- Tallo: permanece fijo en el centro -->
+    <path d="M194 194
+      C194 235 214 276 246 310
+      L270 334
+      L283 322
+      C246 292 219 253 209 218
+      L207 194Z"
+      fill="url(#cloverGradient)"/>
+
+    <circle cx="200" cy="200" r="6" fill="#B4FFE9"/>
   </svg>
 
   <header class="site-header">
     <a class="brand" href="#inicio">LEVIZ<span>PG</span> 🍀</a>
+
     <nav aria-label="Navegación principal">
       <a href="#historia">Mi historia</a>
       <a href="#musica">Mis redes</a>
@@ -604,6 +641,7 @@
   </header>
 
   <main>
+    <!-- PRESENTACIÓN -->
     <section class="hero">
       <div class="eyebrow">Artista urbano independiente · Cuba</div>
 
@@ -620,10 +658,11 @@
 
       <div class="hero-actions">
         <a class="btn btn-primary"
-           href="https://open.spotify.com/artist/2PIQTmPNz7CF5rsNk4gKiy?si=9y3L6dSLSp-4qJj7H3vxnw"
+           href="https://open.spotify.com/artist/2PIQTmPNz7CF5rsNk4gKiy?si=9y3L6dSLSp-4qJj7H3vxnw&utm_source=whatsapp"
            target="_blank" rel="noopener noreferrer">
           ▶ Escuchar mi música
         </a>
+
         <a class="btn btn-secondary" href="#historia">
           Conoce mi historia ↓
         </a>
@@ -635,6 +674,7 @@
       </div>
     </section>
 
+    <!-- HISTORIA DEL ARTISTA -->
     <section class="content-section reveal" id="historia">
       <div class="section-heading">
         <div class="section-label">01 / Mi camino</div>
@@ -646,47 +686,38 @@
 
       <article class="story-card">
         <p>
-          Hola a toda mi gente linda 🍀🔥. Soy <strong>Leviz</strong>,
+          Hola a toda mi gente linda 🍀🔥. Soy <strong>Leviz</strong> y soy
           un artista urbano independiente de Cuba. Vengo a compartir mi
-          sueño con ustedes y a invitarlos a formar parte de este lindo proceso.
-          Pero antes, quisiera contarles un poco de mi historia.
+          sueño con ustedes y que formen parte de este lindo proceso...
+          pero antes quisiera contarles un poco de mi historia.
         </p>
 
         <p>
-          Siempre estuve aferrado a la música. Sin embargo, a los 14 años
-          hubo un pequeño cambio en mi sueño: quería ser baterista. Debido
-          a mi situación económica de aquel entonces y a la falta de
-          oportunidades, la vida empezó a mostrarme otros caminos.
+          Siempre estuve aferrado a la música, pero desde los 14 años hubo
+          un ligero cambio en mi sueño, pues era ser baterista yyy debido
+          a mi situación económica de ese entonces y la falta de oportunidades,
+          aparecieron en mi vida varios de mis referentes como
+          <strong>Milo J, Eladio Carrión, Bad Bunny y Luar La L</strong>.
+          Entonces me pregunté: <strong>¿Será este el camino?</strong>
         </p>
 
         <p>
-          En ese momento aparecieron varios artistas que se convirtieron
-          en referentes para mí, como <strong>Milo J, Eladio Carrión,
-          Bad Bunny y Luar La L</strong>. Entonces me hice una pregunta:
-          <strong>¿será este el camino?</strong>
-        </p>
-
-        <p>
-          No lo sabría hasta intentarlo. Y por eso decidí perseguir ese
-          sueño: salir algún día a un escenario y conectar con todos ustedes
-          a través de mis historias, en su mayoría personales, convertidas
-          en canciones.
-        </p>
-
-        <p>
-          Quiero demostrar, a través de mi música, que la suerte no aparece
-          simplemente porque sí. Hay que buscarla todos los días, con
-          trabajo duro, esfuerzo y dedicación. Cada paso cuenta, incluso
-          cuando nadie más lo ve.
+          Bueno... no lo sabría hasta intentarlo, desde entonces supe que
+          mi sueño era salir un día al escenario y conectar con todos ustedes
+          a través de mis historias en su mayoría personales en forma de canciones
+          y demostrar a través de las mismas que la suerte no existe como tal,
+          sino que tú debes buscarla todos los días de este mundo con trabajo
+          duro, esfuerzo y dedicación...
         </p>
 
         <div class="story-highlight">
           <small>Mi lema · Mi identidad</small>
-          EL QUE LE DA LA SUERTE AL TRÉBOL 🍀🔥
+          Te lo dice «EL QUE LE DA LA SUERTE AL TRÉBOL» 🍀🔥
         </div>
       </article>
     </section>
 
+    <!-- REDES Y PLATAFORMAS MUSICALES -->
     <section class="content-section reveal" id="musica">
       <div class="section-heading">
         <div class="section-label">02 / Conecta conmigo</div>
@@ -698,8 +729,9 @@
       </div>
 
       <div class="platform-grid">
+
         <a class="platform-card"
-           href="https://open.spotify.com/artist/2PIQTmPNz7CF5rsNk4gKiy?si=9y3L6dSLSp-4qJj7H3vxnw"
+           href="https://open.spotify.com/artist/2PIQTmPNz7CF5rsNk4gKiy?si=9y3L6dSLSp-4qJj7H3vxnw&utm_source=whatsapp"
            target="_blank" rel="noopener noreferrer">
           <div>
             <div class="platform-icon">♫</div>
@@ -763,40 +795,46 @@
           </div>
           <span class="platform-link">Unirme ↗</span>
         </a>
+
       </div>
     </section>
 
+    <!-- INFORMACIÓN PÚBLICA DEL ARTISTA -->
     <section class="content-section reveal" id="info">
       <div class="section-heading">
         <div class="section-label">03 / Perfil artístico</div>
         <h2>Lo que debes saber.</h2>
         <p class="section-intro">
-          Una pequeña referencia para quienes quieren conocer más sobre
-          el artista y su recorrido musical.
+          Una referencia para quienes quieren conocer más sobre el artista
+          y su recorrido musical.
         </p>
       </div>
 
       <div class="info-layout">
         <article class="info-card">
           <h3>¿Quién es Leviz PG?</h3>
+
           <p>
-            <strong>Leviz PG</strong> es un cantante emergente y creador de
-            contenido enfocado principalmente en el género urbano y el trap.
+            <strong>Leviz PG es un cantante emergente y creador de contenido
+            enfocado principalmente en el género urbano y el trap.</strong>
             Su música se distribuye a través de plataformas digitales,
             destacando su canal oficial de YouTube.
           </p>
+
           <p>
             En su repertorio audiovisual cuenta con producciones propias
             como los videos oficiales de los temas <strong>«MUSA»</strong>
             y <strong>«MÍRAME»</strong>.
           </p>
+
           <p>
-            Asimismo, comparte un vínculo artístico estrecho en la
-            coautoría de proyectos relacionados con el pseudónimo
-            <strong>Elviscocho</strong>. Entre esas colaboraciones e
-            interpretaciones conjuntas sobresalen sencillos independientes
-            como <strong>«Momentum»</strong> y <strong>«Joven Millonario»</strong>.
+            Asimismo, comparte un vínculo artístico estrecho en la coautoría
+            de proyectos vinculados al pseudónimo de <em>Elviscocho</em>.
+            Entre esas colaboraciones e interpretaciones conjuntas sobresalen
+            sencillos independientes como <strong>«Momentum»</strong> y
+            <strong>«Joven Millonario»</strong>.
           </p>
+
           <p>
             De este modo, el artista consolida de forma independiente su
             presencia musical dentro de la escena del trap alternativo.
@@ -805,34 +843,58 @@
           <div class="update-note">
             <div class="note-icon">⟳</div>
             <p>
-              <strong>Información actualizada cada 2 semanas.</strong><br>
-              Este apartado se revisará periódicamente para reflejar
-              las novedades y la información pública disponible sobre el artista.
+              <strong>Esta información se actualiza cada 2 semanas.</strong><br>
+              El contenido se revisará periódicamente para incorporar
+              novedades y reflejar la información pública disponible
+              sobre el artista.
             </p>
           </div>
         </article>
 
         <aside class="info-card">
           <h3>Ficha del artista</h3>
+
           <ul class="fact-list">
-            <li><strong>Nombre artístico:</strong><br>Leviz PG / levizpg</li>
-            <li><strong>Origen:</strong><br>Cuba 🇨🇺</li>
-            <li><strong>Género:</strong><br>Música urbana · Trap</li>
-            <li><strong>Actividad:</strong><br>Artista independiente</li>
-            <li><strong>Producciones destacadas:</strong><br>MUSA · MÍRAME</li>
-            <li><strong>Colaboraciones mencionadas:</strong><br>Momentum · Joven Millonario</li>
+            <li>
+              <strong>Nombre artístico:</strong><br>
+              Leviz PG / levizpg
+            </li>
+            <li>
+              <strong>Origen:</strong><br>
+              Cuba 🇨🇺
+            </li>
+            <li>
+              <strong>Género:</strong><br>
+              Música urbana · Trap
+            </li>
+            <li>
+              <strong>Actividad:</strong><br>
+              Artista independiente
+            </li>
+            <li>
+              <strong>Producciones destacadas:</strong><br>
+              MUSA · MÍRAME
+            </li>
+            <li>
+              <strong>Colaboraciones mencionadas:</strong><br>
+              Momentum · Joven Millonario
+            </li>
           </ul>
         </aside>
       </div>
     </section>
 
+    <!-- LEMA FINAL -->
     <section class="quote-section reveal">
       <div class="quote-mark">“</div>
+
       <blockquote>
         La suerte no se espera.<br>
         Se busca con trabajo, esfuerzo y dedicación.
       </blockquote>
+
       <p>— Leviz PG · El que le da la suerte al trébol 🍀</p>
+
       <div class="hero-actions">
         <a class="btn btn-primary"
            href="https://youtube.com/@leviz_pg?si=oxVT2Fh2MFXYjkMm"
@@ -844,15 +906,18 @@
   </main>
 
   <footer>
-    <div>© <span id="year"></span> <strong>levizpg</strong>. Hecho con pasión 🍀</div>
+    <div>
+      © <span id="year"></span> <strong>levizpg</strong>. Hecho con pasión 🍀
+    </div>
     <a class="back-top" href="#inicio">Volver arriba ↑</a>
   </footer>
 
   <script>
     // Año automático en el pie de página.
-    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
 
-    // Aparición progresiva de las secciones al desplazarse.
+    // Aparición progresiva de las secciones.
     const revealItems = document.querySelectorAll(".reveal");
 
     if ("IntersectionObserver" in window) {
