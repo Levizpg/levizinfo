@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#050806">
-  <meta name="description" content="Leviz PG. El que le da la suerte al trébol. Música urbana independiente desde Cuba.">
-  <meta property="og:title" content="LEVIZPG — La suerte se busca">
-  <meta property="og:description" content="Una historia real. Un sueño sin límites. Descubre el universo de Leviz PG.">
+  <meta name="description" content="Leviz PG. Música urbana independiente desde Cuba. Descubre su historia, juega a poner a prueba tus conocimientos y entérate de los próximos conciertos.">
+  <meta property="og:title" content="LEVIZPG® — El que le da la suerte al trébol">
+  <meta property="og:description" content="Descubre la historia de Leviz PG, escucha su música y demuestra cuánto sabes de él.">
   <meta property="og:type" content="website">
   <title>LEVIZPG® — El que le da la suerte al trébol</title>
 
@@ -22,12 +22,11 @@
       --panel: #0b120d;
       --green: #73ffa7;
       --green2: #23d978;
-      --green3: #b8ffd0;
+      --green3: #c4f8d4;
       --white: #f4fff7;
-      --muted: #98a99d;
-      --line: rgba(157, 255, 187, .13);
-      --max: 1180px;
-      --ease: cubic-bezier(.2, .75, .25, 1);
+      --muted: #9aada0;
+      --line: rgba(157,255,187,.14);
+      --max: 1160px;
     }
 
     *, *::before, *::after {
@@ -39,82 +38,94 @@
     html {
       scroll-behavior: smooth;
       scroll-padding-top: 90px;
-      scrollbar-color: #246c43 #050806;
     }
 
     body {
       min-width: 320px;
+      overflow-x: clip;
       background: var(--bg);
       color: var(--white);
       font-family: "DM Sans", sans-serif;
-      overflow-x: clip;
       -webkit-font-smoothing: antialiased;
     }
 
-    body::before {
-      content: "";
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    ::selection { background: var(--green); color: #03150a; }
+
+    /* =================================================
+       TRÉBOL GLOBAL: FIJO, GIRANDO DETRÁS DE TODO
+       ================================================= */
+
+    .clover-background {
       position: fixed;
+      z-index: 0;
       inset: 0;
-      z-index: -5;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
       pointer-events: none;
-      background:
-        radial-gradient(ellipse at 50% 0%, rgba(31, 133, 69, .16), transparent 43%),
-        radial-gradient(ellipse at 0% 65%, rgba(18, 92, 47, .10), transparent 36%),
-        radial-gradient(ellipse at 100% 85%, rgba(28, 110, 59, .08), transparent 35%),
-        #050806;
+      opacity: .135;
     }
 
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: 20;
-      pointer-events: none;
-      opacity: .09;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.24'/%3E%3C/svg%3E");
+    .clover-aura {
+      position: absolute;
+      width: min(72vw, 720px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: rgba(35,217,120,.12);
+      filter: blur(100px);
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    .clover-rotator {
+      width: min(72vw, 720px);
+      min-width: 320px;
+      aspect-ratio: 1;
+      flex: 0 0 auto;
+      animation: cloverSpin 100s linear infinite;
+      will-change: transform;
     }
 
-    button {
-      font: inherit;
+    .clover-rotator svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
     }
 
-    a, button {
-      -webkit-tap-highlight-color: transparent;
+    @keyframes cloverSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
-    ::selection {
-      background: var(--green);
-      color: #03150a;
+    /* Todos los elementos reales pasan por delante del trébol. */
+    .site-content {
+      position: relative;
+      z-index: 1;
     }
 
     .container {
-      width: min(var(--max), calc(100% - 48px));
+      width: min(var(--max), calc(100% - 44px));
       margin-inline: auto;
     }
 
     .ambient {
       position: fixed;
-      z-index: -3;
-      width: 390px;
+      z-index: 0;
+      width: 330px;
       aspect-ratio: 1;
       border-radius: 50%;
-      background: rgba(49, 232, 119, .08);
-      filter: blur(110px);
+      background: rgba(49,232,119,.06);
+      filter: blur(100px);
       pointer-events: none;
-      animation: ambient 18s ease-in-out infinite alternate;
+      animation: ambientMove 18s ease-in-out infinite alternate;
     }
 
-    .ambient-a { top: 8%; left: -250px; }
-    .ambient-b { right: -260px; top: 50%; animation-delay: -9s; }
+    .ambient-a { top: 5%; left: -240px; }
+    .ambient-b { right: -250px; top: 55%; animation-delay: -9s; }
 
-    @keyframes ambient {
-      from { transform: translate(0, 0) scale(.9); }
-      to { transform: translate(90px, 65px) scale(1.2); }
+    @keyframes ambientMove {
+      to { transform: translate(80px,60px) scale(1.2); }
     }
 
     /* INTRO */
@@ -126,7 +137,7 @@
       display: grid;
       place-items: center;
       background: #030604;
-      animation: introExit .8s 1.35s ease forwards;
+      animation: introExit .7s 1.4s ease forwards;
       pointer-events: none;
     }
 
@@ -134,19 +145,19 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 15px;
-      animation: introEnter .8s ease both;
+      gap: 14px;
+      animation: fadeUp .8s ease both;
     }
 
     .intro-clover {
-      font-size: 65px;
-      filter: drop-shadow(0 0 25px rgba(115,255,167,.4));
-      animation: introFloat 1.4s ease-in-out infinite alternate;
+      font-size: 60px;
+      filter: drop-shadow(0 0 22px rgba(115,255,167,.4));
+      animation: introFloat 1.5s ease-in-out infinite alternate;
     }
 
     .intro-wordmark {
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(35px, 8vw, 62px);
+      font-size: clamp(36px, 8vw, 60px);
       font-weight: 700;
       letter-spacing: -.07em;
     }
@@ -154,7 +165,7 @@
     .intro-wordmark span { color: var(--green); }
 
     .intro-line {
-      width: 130px;
+      width: 125px;
       height: 2px;
       overflow: hidden;
       background: rgba(115,255,167,.15);
@@ -165,54 +176,46 @@
       display: block;
       height: 100%;
       background: var(--green);
-      transform-origin: left;
-      animation: loadingLine 1.15s ease forwards;
+      animation: lineLoad 1.1s ease forwards;
     }
 
     @keyframes introExit {
       to { opacity: 0; visibility: hidden; }
     }
 
-    @keyframes introEnter {
-      from { opacity: 0; transform: translateY(14px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     @keyframes introFloat {
       to { transform: translateY(-7px) rotate(5deg); }
     }
 
-    @keyframes loadingLine {
-      from { transform: scaleX(0); }
-      to { transform: scaleX(1); }
+    @keyframes lineLoad {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
     }
 
-    /* NAV */
+    /* NAVEGACIÓN */
 
     .topbar {
-      position: fixed;
+      position: sticky;
       z-index: 100;
       top: 0;
-      right: 0;
-      left: 0;
-      background: rgba(5, 8, 6, .76);
-      border-bottom: 1px solid rgba(255,255,255,.055);
+      background: rgba(5,8,6,.83);
+      border-bottom: 1px solid rgba(255,255,255,.06);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
     }
 
     .nav {
-      height: 75px;
+      min-height: 73px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      gap: 20px;
     }
 
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 9px;
       flex-shrink: 0;
       font-family: "Space Grotesk", sans-serif;
       font-size: 19px;
@@ -221,8 +224,8 @@
     }
 
     .brand-clover {
-      font-size: 26px;
-      filter: drop-shadow(0 0 12px rgba(115,255,167,.35));
+      font-size: 25px;
+      filter: drop-shadow(0 0 12px rgba(115,255,167,.3));
     }
 
     .brand-name span { color: var(--green); }
@@ -230,84 +233,62 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 28px;
-      color: #b3c2b7;
-      font-size: 12px;
-      font-weight: 600;
+      gap: 24px;
+      color: #b6c7ba;
+      font-size: 11px;
+      font-weight: 700;
     }
 
-    .nav-links a {
-      position: relative;
-      transition: color .2s;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      bottom: -7px;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      background: var(--green);
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform .25s;
-    }
-
+    .nav-links a { transition: color .2s; }
     .nav-links a:hover { color: var(--green); }
-    .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
 
-    .nav-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 10px 15px;
+    .nav-cta {
+      padding: 10px 14px;
       border: 1px solid rgba(115,255,167,.28);
       border-radius: 9px;
-      color: var(--green3);
       background: rgba(115,255,167,.05);
-      font-size: 11px;
+      color: var(--green3);
+      font-size: 10px;
       font-weight: 800;
       transition: .25s;
     }
 
-    .nav-button:hover {
-      color: #04170b;
+    .nav-cta:hover {
+      color: #03170a;
       background: var(--green);
-      border-color: var(--green);
     }
 
     /* HERO */
 
     .hero {
       position: relative;
-      isolation: isolate;
-      min-height: min(930px, max(760px, 100svh));
+      min-height: 740px;
+      min-height: min(900px, max(720px, 91svh));
       display: flex;
       align-items: center;
-      padding: 140px 0 105px;
+      padding: 105px 0 115px;
+      text-align: center;
+      overflow: clip;
     }
 
     .hero-inner {
+      width: 100%;
       position: relative;
       z-index: 2;
-      width: 100%;
-      text-align: center;
     }
 
     .hero-kicker {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 10px;
+      gap: 9px;
       padding: 9px 13px;
       border: 1px solid var(--line);
       border-radius: 999px;
-      background: rgba(9, 22, 13, .72);
+      background: rgba(7,16,10,.84);
       color: #c4f8d4;
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 800;
-      letter-spacing: 1.8px;
+      letter-spacing: 1.6px;
       animation: fadeUp .8s .2s both;
     }
 
@@ -320,58 +301,56 @@
       animation: blink 2s infinite;
     }
 
-    @keyframes blink {
-      50% { opacity: .4; }
-    }
+    @keyframes blink { 50% { opacity: .4; } }
 
     .hero-title-wrap {
       width: 100%;
-      padding: 4px 0 13px;
-      margin: 14px auto 0;
+      padding: 6px 0 14px;
+      margin-top: 15px;
       overflow: visible;
     }
 
     .hero-title {
-      width: 100%;
       display: block;
-      padding: .04em .10em .19em .025em;
+      width: 100%;
+      padding: .04em .11em .2em .025em;
       margin: 0 auto;
       overflow: visible;
       white-space: nowrap;
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(65px, 13.4vw, 160px);
+      font-size: clamp(62px, 13.2vw, 156px);
       font-weight: 700;
       letter-spacing: -.085em;
-      line-height: 1.18;
-      background: linear-gradient(180deg, #fff 10%, #e1ffeb 46%, #75ffa8 100%);
+      line-height: 1.2;
+      background: linear-gradient(180deg,#fff 8%,#e0ffea 48%,#75ffa8 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 10px 38px rgba(63,244,131,.12));
-      animation: titleIn 1.1s .2s var(--ease) both;
+      filter: drop-shadow(0 8px 32px rgba(63,244,131,.12));
+      animation: titleIn 1s .15s both;
     }
 
     @keyframes titleIn {
       from { opacity: 0; transform: translateY(22px) scale(.97); filter: blur(8px); }
-      to { opacity: 1; transform: translateY(0) scale(1); filter: drop-shadow(0 10px 38px rgba(63,244,131,.12)); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .hero-tagline {
       margin-top: 2px;
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(20px, 3.2vw, 32px);
+      font-size: clamp(20px,3.2vw,31px);
       font-weight: 600;
-      letter-spacing: -.9px;
+      letter-spacing: -.8px;
       animation: fadeUp .8s .35s both;
     }
 
-    .hero-tagline span { color: var(--green); }
+    .accent { color: var(--green); }
 
     .hero-description {
-      max-width: 550px;
+      max-width: 540px;
       margin: 17px auto 0;
       color: var(--muted);
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.95;
       animation: fadeUp .8s .45s both;
     }
@@ -387,163 +366,88 @@
     }
 
     .button {
-      min-height: 51px;
+      min-height: 49px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      padding: 0 22px;
+      gap: 9px;
+      padding: 0 21px;
       border: 1px solid transparent;
       border-radius: 10px;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 800;
-      letter-spacing: .3px;
-      transition: transform .25s var(--ease), background .25s, box-shadow .25s, border-color .25s;
+      letter-spacing: .35px;
+      cursor: pointer;
+      transition: transform .25s, background .25s, border-color .25s, box-shadow .25s;
     }
 
     .button:hover { transform: translateY(-3px); }
 
     .button-primary {
-      background: var(--green);
       color: #03170a;
-      box-shadow: 0 0 30px rgba(115,255,167,.13);
+      background: var(--green);
+      box-shadow: 0 0 28px rgba(115,255,167,.12);
     }
 
     .button-primary:hover {
       background: #c0ffd4;
-      box-shadow: 0 10px 35px rgba(115,255,167,.23);
+      box-shadow: 0 8px 32px rgba(115,255,167,.2);
     }
 
     .button-secondary {
       color: #e7f5ea;
-      border-color: rgba(255,255,255,.14);
       background: rgba(255,255,255,.035);
+      border-color: rgba(255,255,255,.14);
     }
 
     .button-secondary:hover {
-      border-color: rgba(115,255,167,.42);
+      border-color: rgba(115,255,167,.4);
       background: rgba(115,255,167,.06);
     }
 
     .hero-note {
-      margin-top: 28px;
-      color: #7d9383;
+      margin-top: 27px;
+      color: #91a797;
       font-size: 9px;
       font-weight: 700;
-      letter-spacing: 1.7px;
+      letter-spacing: 1.4px;
       animation: fadeUp .8s .65s both;
     }
 
     .hero-note span { color: var(--green); }
 
-    /* CLOVER */
-
-    .clover-scene {
-      position: absolute;
-      z-index: -1;
-      top: 50%;
-      left: 50%;
-      width: min(510px, 88vw);
-      aspect-ratio: 1;
-      transform: translate(-50%, -52%);
-      opacity: .22;
-      pointer-events: none;
-      filter: drop-shadow(0 0 35px rgba(66,245,132,.16));
-    }
-
-    .clover-svg {
-      width: 100%;
-      height: 100%;
-      overflow: visible;
-    }
-
-    .leaf-shape {
-      fill: url(#leafFill);
-      stroke: rgba(139,255,176,.38);
-      stroke-width: 1.2;
-    }
-
-    /* Each outer group establishes its own direction.
-       The inner path gently rotates around the fixed center. */
-    .leaf-wobble {
-      transform-box: view-box;
-      transform-origin: 200px 200px;
-      animation: leafWobble 7s ease-in-out infinite alternate;
-    }
-
-    .leaf-wobble.l2 { animation-delay: -1.7s; }
-    .leaf-wobble.l3 { animation-delay: -3.4s; }
-    .leaf-wobble.l4 { animation-delay: -5.1s; }
-
-    @keyframes leafWobble {
-      from { rotate: -4deg; }
-      to { rotate: 4deg; }
-    }
-
-    .stem {
-      fill: none;
-      stroke: #72ffa4;
-      stroke-width: 8;
-      stroke-linecap: round;
-      opacity: .9;
-    }
-
-    .orbit {
-      position: absolute;
-      inset: 3%;
-      border: 1px solid rgba(115,255,167,.12);
-      border-radius: 50%;
-      animation: orbit 55s linear infinite;
-    }
-
-    .orbit::before, .orbit::after {
-      content: "";
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 14px var(--green);
-    }
-
-    .orbit::before { top: 12%; left: 18%; }
-    .orbit::after { right: 9%; bottom: 20%; }
-
-    @keyframes orbit { to { transform: rotate(360deg); } }
-
     .scroll-cue {
       position: absolute;
-      bottom: 25px;
+      bottom: 24px;
       left: 50%;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 8px;
-      color: #7e9484;
-      font-size: 9px;
-      letter-spacing: 2px;
+      color: #a0b4a5;
+      font-size: 8px;
+      letter-spacing: 1.7px;
       transform: translateX(-50%);
     }
 
     .scroll-line {
       width: 1px;
-      height: 29px;
-      background: linear-gradient(var(--green), transparent);
-      animation: scrollPulse 2s ease-in-out infinite;
+      height: 27px;
+      background: linear-gradient(var(--green),transparent);
+      animation: scrollPulse 2s infinite;
     }
 
     @keyframes scrollPulse {
-      0%, 100% { opacity: .35; transform: scaleY(.75); transform-origin: top; }
+      0%,100% { opacity: .35; transform: scaleY(.7); transform-origin: top; }
       50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
     }
 
-    /* MOVING TEXT */
+    /* TEXTO EN MOVIMIENTO */
 
     .marquee {
       overflow: hidden;
-      border-top: 1px solid rgba(255,255,255,.06);
-      border-bottom: 1px solid rgba(255,255,255,.06);
-      background: rgba(255,255,255,.016);
+      border-block: 1px solid rgba(255,255,255,.07);
+      background: rgba(5,8,6,.48);
     }
 
     .marquee-track {
@@ -555,180 +459,68 @@
     .marquee-group {
       display: flex;
       align-items: center;
-      gap: 27px;
-      padding: 17px 14px;
+      gap: 25px;
+      padding: 17px 13px;
       white-space: nowrap;
-      color: #a4b6a9;
+      color: #b6c7ba;
       font-family: "Space Grotesk", sans-serif;
       font-size: 10px;
       font-weight: 700;
       letter-spacing: 2px;
     }
 
-    .marquee-group .spark { color: var(--green); font-size: 15px; }
+    .spark { color: var(--green); }
 
     @keyframes marquee { to { transform: translateX(-50%); } }
 
-    /* SECTION FRAMEWORK */
+    /* SECCIONES */
 
-    .section { padding: 108px 0; }
+    .section { padding: 94px 0; }
 
     .section-head {
       max-width: 680px;
-      margin: 0 auto 45px;
+      margin: 0 auto 39px;
       text-align: center;
     }
 
     .eyebrow {
       color: var(--green);
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 800;
-      letter-spacing: 3px;
+      letter-spacing: 2.7px;
       text-transform: uppercase;
     }
 
     .section-title {
       margin-top: 13px;
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(34px, 5.3vw, 56px);
-      line-height: 1.15;
-      letter-spacing: -2px;
+      font-size: clamp(34px,5vw,53px);
       font-weight: 700;
+      line-height: 1.17;
+      letter-spacing: -1.8px;
     }
 
-    .accent { color: var(--green); }
-
     .section-subtitle {
-      max-width: 530px;
-      margin: 16px auto 0;
+      max-width: 540px;
+      margin: 15px auto 0;
       color: var(--muted);
-      font-size: 13px;
+      font-size: 12px;
       line-height: 1.95;
     }
 
-    /* SOCIAL PLATFORMS */
-
-    .social-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 15px;
-    }
-
-    .social-card {
-      --social: #73ffa7;
-      position: relative;
-      isolation: isolate;
-      min-width: 0;
-      min-height: 115px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      padding: 21px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 17px;
-      background: linear-gradient(145deg, rgba(16,30,20,.82), rgba(7,13,9,.82));
-      transition: transform .3s var(--ease), border-color .3s, background .3s, box-shadow .3s;
-    }
-
-    .social-card::before {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      top: -80px;
-      right: -75px;
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      background: var(--social);
-      filter: blur(60px);
-      opacity: .08;
-      transition: opacity .3s;
-    }
-
-    .social-card:hover {
-      transform: translateY(-5px);
-      border-color: color-mix(in srgb, var(--social) 48%, transparent);
-      background: linear-gradient(145deg, rgba(20,39,26,.94), rgba(8,16,10,.94));
-      box-shadow: 0 18px 45px rgba(0,0,0,.22);
-    }
-
-    .social-card:hover::before { opacity: .2; }
-
-    .social-icon {
-      flex: 0 0 47px;
-      width: 47px;
-      height: 47px;
-      display: grid;
-      place-items: center;
-      border: 1px solid color-mix(in srgb, var(--social) 26%, transparent);
-      border-radius: 13px;
-      background: color-mix(in srgb, var(--social) 8%, transparent);
-      color: var(--social);
-    }
-
-    .social-icon svg {
-      width: 22px;
-      height: 22px;
-      fill: currentColor;
-    }
-
-    .social-info { min-width: 0; flex: 1; }
-
-    .social-info h3 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      line-height: 1.4;
-    }
-
-    .social-info p {
-      margin-top: 4px;
-      color: var(--muted);
-      font-size: 10px;
-      line-height: 1.5;
-    }
-
-    .social-arrow {
-      flex: 0 0 auto;
-      color: #819788;
-      font-size: 18px;
-      transition: transform .25s, color .25s;
-    }
-
-    .social-card:hover .social-arrow {
-      color: var(--green);
-      transform: translate(3px, -3px);
-    }
-
-    /* FEATURED MUSIC */
+    /* MÚSICA */
 
     .music-feature {
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
       display: grid;
       grid-template-columns: 1fr auto;
       align-items: center;
-      gap: 28px;
-      padding: clamp(27px, 5vw, 48px);
-      border: 1px solid rgba(115,255,167,.18);
+      gap: 25px;
+      padding: clamp(27px,5vw,45px);
+      border: 1px solid var(--line);
       border-radius: 22px;
       background:
-        radial-gradient(ellipse at 100% 0%, rgba(42,190,98,.13), transparent 47%),
-        linear-gradient(135deg, rgba(17,32,21,.9), rgba(7,13,9,.94));
-    }
-
-    .music-feature::after {
-      content: "♫";
-      position: absolute;
-      z-index: -1;
-      right: 21%;
-      top: -90px;
-      color: rgba(115,255,167,.035);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 280px;
-      line-height: 1;
+        radial-gradient(ellipse at 100% 0%,rgba(42,190,98,.12),transparent 48%),
+        rgba(7,14,9,.82);
     }
 
     .music-label {
@@ -736,129 +528,176 @@
       align-items: center;
       gap: 8px;
       color: var(--green);
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 800;
-      letter-spacing: 2px;
+      letter-spacing: 1.7px;
     }
 
     .music-feature h3 {
       margin-top: 13px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(25px, 4vw, 39px);
-      line-height: 1.2;
-      letter-spacing: -1.3px;
+      font-family: "Space Grotesk",sans-serif;
+      font-size: clamp(25px,4vw,37px);
+      line-height: 1.25;
+      letter-spacing: -1px;
     }
 
     .music-feature p {
-      max-width: 560px;
+      max-width: 570px;
       margin-top: 12px;
       color: var(--muted);
-      font-size: 13px;
+      font-size: 12px;
       line-height: 1.9;
     }
 
-    .music-action { position: relative; z-index: 1; }
+    /* REDES */
 
-    /* ARTIST STORY */
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(3,minmax(0,1fr));
+      gap: 14px;
+    }
+
+    .social-card {
+      --social: #73ffa7;
+      min-width: 0;
+      min-height: 108px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 17px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: rgba(8,16,10,.82);
+      transition: transform .25s,border-color .25s,background .25s;
+    }
+
+    .social-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--social);
+      background: rgba(15,29,19,.94);
+    }
+
+    .social-icon {
+      flex: 0 0 43px;
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(115,255,167,.13);
+      border-radius: 12px;
+      background: rgba(115,255,167,.06);
+      color: var(--social);
+    }
+
+    .social-icon svg {
+      width: 21px;
+      height: 21px;
+      fill: currentColor;
+    }
+
+    .social-info { flex: 1; min-width: 0; }
+
+    .social-info h3 {
+      font-family: "Space Grotesk",sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .social-info p {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 9px;
+      line-height: 1.5;
+    }
+
+    .social-arrow {
+      color: #9db3a2;
+      transition: color .2s,transform .2s;
+    }
+
+    .social-card:hover .social-arrow {
+      color: var(--green);
+      transform: translate(2px,-2px);
+    }
+
+    /* HISTORIA */
 
     .story-layout {
       display: grid;
-      grid-template-columns: .82fr 1.18fr;
+      grid-template-columns: .8fr 1.2fr;
       align-items: start;
-      gap: 60px;
+      gap: 48px;
     }
 
-    .story-side { position: sticky; top: 112px; }
+    .story-side { position: sticky; top: 105px; }
 
     .story-symbol {
       display: block;
-      margin-bottom: 21px;
-      font-size: 48px;
-      filter: drop-shadow(0 0 17px rgba(115,255,167,.24));
+      margin-bottom: 19px;
+      font-size: 44px;
+      filter: drop-shadow(0 0 16px rgba(115,255,167,.25));
     }
 
     .story-side h2 {
       margin-top: 13px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(36px, 5vw, 58px);
-      font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: -2.3px;
+      font-family: "Space Grotesk",sans-serif;
+      font-size: clamp(36px,4.5vw,53px);
+      line-height: 1.12;
+      letter-spacing: -2px;
     }
 
-    .story-side h2 span { color: var(--green); }
-
     .story-side > p {
-      max-width: 360px;
-      margin-top: 19px;
+      max-width: 350px;
+      margin-top: 17px;
       color: var(--muted);
-      font-size: 13px;
+      font-size: 12px;
       line-height: 1.95;
     }
 
     .story-rule {
-      width: 65px;
+      width: 62px;
       height: 2px;
-      margin-top: 28px;
-      background: linear-gradient(90deg, var(--green), transparent);
+      margin-top: 27px;
+      background: linear-gradient(90deg,var(--green),transparent);
     }
 
     .story-card {
-      padding: clamp(25px, 4vw, 42px);
+      padding: clamp(23px,4vw,39px);
       border: 1px solid var(--line);
-      border-radius: 22px;
-      background:
-        radial-gradient(ellipse at top right, rgba(42,156,80,.09), transparent 50%),
-        rgba(10,18,12,.88);
-      box-shadow: 0 25px 80px rgba(0,0,0,.13);
+      border-radius: 20px;
+      background: rgba(8,16,10,.84);
     }
 
     .story-card p {
-      margin-bottom: 20px;
-      color: #bfcec3;
-      font-size: 13px;
+      margin-bottom: 19px;
+      color: #c0d0c4;
+      font-size: 12px;
       line-height: 2.05;
     }
 
     .story-card p:last-of-type { margin-bottom: 0; }
-    .story-card strong { color: #f0fff4; font-weight: 700; }
+    .story-card strong { color: #effff3; }
 
     .story-quote {
-      margin-top: 29px;
-      padding: 20px 22px;
+      margin-top: 26px;
+      padding: 18px 20px;
       border-left: 2px solid var(--green);
-      border-radius: 0 12px 12px 0;
+      border-radius: 0 11px 11px 0;
       background: rgba(115,255,167,.055);
       color: var(--green3);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(17px, 2.2vw, 21px);
+      font-family: "Space Grotesk",sans-serif;
+      font-size: clamp(16px,2vw,20px);
       font-weight: 700;
       line-height: 1.6;
     }
 
-    /* ARTIST PROFILE */
+    /* PERFIL */
 
     .info-panel {
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
-      padding: clamp(28px, 5vw, 54px);
-      border: 1px solid rgba(115,255,167,.17);
-      border-radius: 24px;
-      background:
-        radial-gradient(ellipse at 100% 0%, rgba(44,179,93,.13), transparent 45%),
-        linear-gradient(145deg, rgba(15,29,19,.94), rgba(7,13,9,.96));
-    }
-
-    .info-panel::after {
-      content: "🍀";
-      position: absolute;
-      z-index: -1;
-      right: -25px;
-      bottom: -70px;
-      font-size: 220px;
-      opacity: .035;
-      transform: rotate(-18deg);
+      padding: clamp(25px,5vw,48px);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(8,16,10,.86);
     }
 
     .info-top {
@@ -866,28 +705,25 @@
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 15px;
-      margin-bottom: 25px;
+      gap: 13px;
+      margin-bottom: 24px;
     }
 
     .info-top h3 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 24px;
-      letter-spacing: -.8px;
+      font-family: "Space Grotesk",sans-serif;
+      font-size: 22px;
     }
 
     .update-pill {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 11px;
-      border: 1px solid rgba(115,255,167,.17);
+      gap: 7px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
       border-radius: 999px;
-      color: #c2f7d1;
-      background: rgba(115,255,167,.05);
-      font-size: 9px;
+      color: var(--green3);
+      font-size: 8px;
       font-weight: 800;
-      letter-spacing: .3px;
     }
 
     .update-pill span {
@@ -898,133 +734,517 @@
     }
 
     .info-copy {
-      max-width: 850px;
-      color: #b9c9bd;
-      font-size: 13px;
+      max-width: 900px;
+      color: #bdcec1;
+      font-size: 12px;
       line-height: 2.05;
     }
 
-    .info-copy strong { color: #effff3; }
+    .info-copy strong { color: var(--white); }
 
     .info-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 9px;
-      margin-top: 25px;
+      gap: 8px;
+      margin-top: 23px;
     }
 
     .info-tag {
-      padding: 8px 12px;
-      border: 1px solid rgba(255,255,255,.085);
+      padding: 8px 11px;
+      border: 1px solid rgba(255,255,255,.09);
       border-radius: 8px;
-      color: #c7d8cb;
       background: rgba(255,255,255,.025);
-      font-size: 10px;
-      font-weight: 600;
+      color: #c7d8cb;
+      font-size: 9px;
     }
 
-    /* ENDING */
+    /* =================================================
+       MINI JUEGO: ¿CUÁNTO CONOCES A LEVIZ?
+       ================================================= */
 
-    .ending { padding: 60px 0 100px; }
-
-    .ending-box {
+    .quiz-section {
       position: relative;
-      isolation: isolate;
+    }
+
+    .quiz-shell {
+      max-width: 850px;
+      margin: 0 auto;
       overflow: hidden;
-      padding: clamp(38px, 7vw, 74px) 24px;
-      border: 1px solid rgba(115,255,167,.18);
-      border-radius: 26px;
+      border: 1px solid rgba(115,255,167,.2);
+      border-radius: 23px;
       background:
-        radial-gradient(ellipse at 50% 120%, rgba(44,205,106,.18), transparent 65%),
-        linear-gradient(145deg, rgba(15,29,19,.95), rgba(6,12,8,.96));
-      text-align: center;
+        radial-gradient(ellipse at 100% 0%,rgba(35,217,120,.09),transparent 42%),
+        rgba(7,14,9,.94);
+      box-shadow: 0 25px 90px rgba(0,0,0,.18);
     }
 
-    .ending-box::before, .ending-box::after {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      width: 250px;
-      aspect-ratio: 1;
-      border: 1px solid rgba(115,255,167,.08);
-      border-radius: 50%;
-    }
-
-    .ending-box::before { top: -180px; left: -70px; }
-    .ending-box::after { right: -70px; bottom: -190px; }
-
-    .ending-clover {
-      display: block;
-      margin-bottom: 17px;
-      font-size: 43px;
-      filter: drop-shadow(0 0 17px rgba(115,255,167,.25));
-      animation: cloverFloat 4s ease-in-out infinite;
-    }
-
-    @keyframes cloverFloat {
-      0%, 100% { transform: translateY(0) rotate(-5deg); }
-      50% { transform: translateY(-7px) rotate(5deg); }
-    }
-
-    .ending-box h2 {
-      margin-top: 14px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(31px, 5.4vw, 55px);
-      line-height: 1.17;
-      letter-spacing: -1.9px;
-    }
-
-    .ending-box h2 span { color: var(--green); }
-
-    .ending-box p {
-      max-width: 480px;
-      margin: 17px auto 25px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.9;
-    }
-
-    /* FOOTER */
-
-    footer { border-top: 1px solid rgba(255,255,255,.06); }
-
-    .footer-inner {
-      min-height: 83px;
+    .quiz-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 18px;
       flex-wrap: wrap;
+      gap: 14px;
+      padding: 22px 26px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.015);
+    }
+
+    .quiz-brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .quiz-brand-icon {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(115,255,167,.07);
+      font-size: 21px;
+    }
+
+    .quiz-brand strong {
+      display: block;
+      font-family: "Space Grotesk",sans-serif;
+      font-size: 14px;
+    }
+
+    .quiz-brand small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    .quiz-score {
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      color: var(--green3);
+      background: rgba(115,255,167,.045);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .quiz-content { padding: clamp(23px,5vw,38px); }
+
+    .quiz-progress-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .quiz-progress-track {
+      height: 5px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+    }
+
+    .quiz-progress-bar {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg,#23d978,#b8ffd0);
+      box-shadow: 0 0 13px rgba(115,255,167,.25);
+      transition: width .35s ease;
+    }
+
+    .quiz-category {
+      display: inline-block;
+      margin-top: 27px;
+      color: var(--green);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .quiz-question {
+      margin-top: 11px;
+      font-family: "Space Grotesk",sans-serif;
+      font-size: clamp(22px,4vw,31px);
+      line-height: 1.35;
+      letter-spacing: -.7px;
+    }
+
+    .quiz-hint {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 11px;
+      margin-top: 24px;
+    }
+
+    .quiz-option {
+      width: 100%;
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 12px;
+      background: rgba(255,255,255,.025);
+      color: #e2eee5;
+      text-align: left;
+      font-size: 11px;
+      line-height: 1.6;
+      cursor: pointer;
+      transition: border-color .2s,background .2s,transform .2s;
+    }
+
+    .quiz-option:hover:not(:disabled) {
+      transform: translateY(-2px);
+      border-color: rgba(115,255,167,.5);
+      background: rgba(115,255,167,.055);
+    }
+
+    .quiz-option:focus-visible,
+    .button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--green);
+      outline-offset: 4px;
+    }
+
+    .option-letter {
+      flex: 0 0 29px;
+      width: 29px;
+      height: 29px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 8px;
+      color: #b3c8b9;
+      font-family: "Space Grotesk",sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .quiz-option:disabled { cursor: default; }
+
+    .quiz-option.correct {
+      border-color: #4be98a;
+      background: rgba(48,196,102,.11);
+      color: #d9ffe5;
+    }
+
+    .quiz-option.correct .option-letter {
+      border-color: #4be98a;
+      background: rgba(75,233,138,.12);
+      color: #aaffc4;
+    }
+
+    .quiz-option.incorrect {
+      border-color: #d97777;
+      background: rgba(210,70,70,.08);
+      color: #ffd1d1;
+    }
+
+    .quiz-option.incorrect .option-letter {
+      border-color: #d97777;
+      color: #ffaaaa;
+    }
+
+    .quiz-feedback {
+      display: none;
+      margin-top: 20px;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(115,255,167,.045);
+    }
+
+    .quiz-feedback.show {
+      display: block;
+      animation: fadeUp .3s ease both;
+    }
+
+    .quiz-feedback h4 {
+      font-family: "Space Grotesk",sans-serif;
+      font-size: 13px;
+    }
+
+    .quiz-feedback p {
+      margin-top: 7px;
+      color: #b8cbbd;
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    .quiz-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 23px;
+    }
+
+    .quiz-footnote {
+      max-width: 320px;
+      color: #8da292;
+      font-size: 9px;
+      line-height: 1.7;
+    }
+
+    .quiz-next:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .quiz-result {
+      display: none;
+      padding: 36px 20px 18px;
+      text-align: center;
+      animation: fadeUp .5s ease both;
+    }
+
+    .quiz-result.show { display: block; }
+
+    .result-icon {
+      font-size: 54px;
+      filter: drop-shadow(0 0 20px rgba(115,255,167,.2));
+    }
+
+    .result-kicker {
+      margin-top: 17px;
+      color: var(--green);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .result-title {
+      margin-top: 11px;
+      font-family: "Space Grotesk",sans-serif;
+      font-size: clamp(28px,5vw,43px);
+      line-height: 1.2;
+      letter-spacing: -1.3px;
+    }
+
+    .result-score {
+      margin-top: 14px;
+      color: var(--green3);
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .result-description {
+      max-width: 480px;
+      margin: 13px auto 24px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .result-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* TICKETS */
+
+    .tickets-section { padding: 85px 0 100px; }
+
+    .ticket-card {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 26px;
+      padding: clamp(27px,5vw,49px);
+      border: 1px solid rgba(115,255,167,.23);
+      border-radius: 23px;
+      background:
+        radial-gradient(ellipse at 100% 0%,rgba(35,217,120,.13),transparent 47%),
+        rgba(7,14,9,.92);
+    }
+
+    .ticket-card::after {
+      content: "✳";
+      position: absolute;
+      z-index: 0;
+      top: -70px;
+      right: 20%;
+      color: rgba(115,255,167,.04);
+      font-size: 230px;
+      pointer-events: none;
+    }
+
+    .ticket-copy { position: relative; z-index: 1; }
+
+    .ticket-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--green);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .ticket-copy h3 {
+      margin-top: 15px;
+      font-family: "Space Grotesk",sans-serif;
+      font-size: clamp(27px,4.5vw,43px);
+      line-height: 1.17;
+      letter-spacing: -1.3px;
+    }
+
+    .ticket-copy p {
+      max-width: 590px;
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.95;
+    }
+
+    .ticket-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 21px;
+      padding: 10px 13px;
+      border: 1px solid rgba(255,207,119,.23);
+      border-radius: 9px;
+      background: rgba(255,207,119,.05);
+      color: #ffdda0;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .ticket-status span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ffcb70;
+      box-shadow: 0 0 9px rgba(255,203,112,.3);
+    }
+
+    .ticket-action {
+      position: relative;
+      z-index: 1;
+      min-width: 165px;
+      padding: 21px 18px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 15px;
+      background: rgba(255,255,255,.025);
+      text-align: center;
+    }
+
+    .ticket-icon { font-size: 27px; }
+
+    .ticket-action strong {
+      display: block;
+      margin-top: 11px;
+      font-family: "Space Grotesk",sans-serif;
+      font-size: 12px;
+    }
+
+    .ticket-action small {
+      display: block;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 9px;
+      line-height: 1.7;
+    }
+
+    .ticket-disclaimer {
+      margin-top: 18px;
+      color: #92a496;
+      font-size: 10px;
+      line-height: 1.9;
+    }
+
+    .ticket-disclaimer a {
+      color: var(--green3);
+      text-decoration: underline;
+      text-decoration-color: rgba(115,255,167,.4);
+      text-underline-offset: 3px;
+    }
+
+    /* CIERRE Y FOOTER */
+
+    .ending { padding: 20px 0 80px; }
+
+    .ending-box {
+      padding: clamp(38px,6vw,66px) 23px;
+      border: 1px solid var(--line);
+      border-radius: 23px;
+      background: rgba(8,16,10,.86);
+      text-align: center;
+    }
+
+    .ending-clover {
+      display: block;
+      margin-bottom: 16px;
+      font-size: 43px;
+      animation: introFloat 4s ease-in-out infinite alternate;
+    }
+
+    .ending-box h2 {
+      margin-top: 13px;
+      font-family: "Space Grotesk",sans-serif;
+      font-size: clamp(31px,5.4vw,52px);
+      line-height: 1.2;
+      letter-spacing: -1.6px;
+    }
+
+    .ending-box p {
+      max-width: 470px;
+      margin: 15px auto 23px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    footer { border-top: 1px solid rgba(255,255,255,.07); }
+
+    .footer-inner {
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
     .footer-brand {
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Space Grotesk",sans-serif;
       font-size: 14px;
       font-weight: 700;
     }
 
     .footer-brand span { color: var(--green); }
 
-    .footer-copy {
-      color: #758a7b;
-      font-size: 10px;
-    }
-
-    .back-top {
-      color: #a9c3b0;
-      font-size: 10px;
-      font-weight: 800;
-      transition: color .2s;
-    }
-
+    .footer-copy { color: #91a395; font-size: 9px; }
+    .back-top { color: #bdd1c2; font-size: 9px; font-weight: 800; }
     .back-top:hover { color: var(--green); }
 
-    /* REVEAL */
+    /* ANIMACIONES DE ENTRADA */
 
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity .75s ease, transform .75s var(--ease);
+      transform: translateY(22px);
+      transition: opacity .7s ease,transform .7s cubic-bezier(.2,.75,.25,1);
     }
 
     .reveal.visible {
@@ -1033,117 +1253,121 @@
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(15px); }
+      from { opacity: 0; transform: translateY(14px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     /* RESPONSIVE */
 
-    @media (min-width: 1500px) {
-      .hero-title { font-size: 166px; }
-    }
-
     @media (max-width: 900px) {
-      .nav-links { gap: 17px; }
-      .social-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .story-layout { gap: 32px; }
-      .hero { min-height: 780px; }
+      .nav-links { gap: 14px; }
+      .social-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .story-layout { gap: 28px; }
+      .hero { min-height: 760px; }
+      .clover-rotator { width: min(88vw,650px); }
     }
 
     @media (max-width: 650px) {
       .container { width: calc(100% - 34px); }
 
-      .nav { height: 66px; }
-      .brand { font-size: 17px; }
-      .brand-clover { font-size: 23px; }
+      .nav { min-height: 65px; }
+      .brand { font-size: 16px; }
+      .brand-clover { font-size: 22px; }
       .nav-links { display: none; }
-      .nav-button { padding: 9px 12px; font-size: 10px; }
+      .nav-cta { padding: 9px 11px; font-size: 9px; }
+
+      .clover-background { opacity: .12; }
+      .clover-rotator { width: 112vw; min-width: 340px; }
 
       .hero {
-        min-height: min(850px, max(700px, 96svh));
-        padding: 119px 0 100px;
+        min-height: min(840px,max(690px,90svh));
+        padding: 105px 0 98px;
       }
 
-      .hero-kicker {
-        font-size: 8px;
-        letter-spacing: 1.2px;
-        gap: 8px;
-      }
-
-      .hero-title-wrap { padding: 5px 0 15px; margin-top: 22px; }
+      .hero-kicker { font-size: 8px; letter-spacing: 1px; }
+      .hero-title-wrap { margin-top: 20px; padding: 5px 0 14px; }
 
       .hero-title {
-        font-size: clamp(53px, 13.2vw, 86px);
+        font-size: clamp(51px,13.1vw,84px);
         letter-spacing: -.075em;
-        line-height: 1.2;
-        padding: .04em .11em .20em .025em;
+        line-height: 1.22;
+        padding: .04em .12em .2em .025em;
       }
 
-      .hero-tagline { font-size: clamp(18px, 4.7vw, 25px); }
-      .hero-description { max-width: 390px; font-size: 12px; }
-      .hero-note { font-size: 8px; letter-spacing: 1px; }
-      .clover-scene { width: min(420px, 105vw); opacity: .18; }
-      .orbit { inset: -1%; }
-      .scroll-cue { bottom: 19px; }
+      .hero-tagline { font-size: clamp(18px,4.8vw,25px); }
+      .hero-description { max-width: 400px; font-size: 12px; }
+      .hero-note { font-size: 8px; letter-spacing: .8px; }
+      .scroll-cue { bottom: 18px; }
 
-      .section { padding: 78px 0; }
-      .section-head { margin-bottom: 31px; }
+      .section { padding: 72px 0; }
+      .section-head { margin-bottom: 29px; }
       .section-title { letter-spacing: -1.2px; }
-      .section-subtitle { font-size: 12px; }
 
-      .social-grid { gap: 10px; }
+      .music-feature { grid-template-columns: 1fr; gap: 20px; }
+      .music-feature h3 { font-size: 28px; }
+      .music-feature .button { width: 100%; }
+
+      .social-grid { gap: 9px; }
 
       .social-card {
-        min-height: 102px;
-        gap: 10px;
-        padding: 13px 11px;
-        border-radius: 13px;
+        min-height: 94px;
+        gap: 9px;
+        padding: 12px 10px;
       }
 
       .social-icon {
-        flex-basis: 37px;
-        width: 37px;
-        height: 37px;
-        border-radius: 10px;
+        flex-basis: 35px;
+        width: 35px;
+        height: 35px;
+        border-radius: 9px;
       }
 
-      .social-icon svg { width: 18px; height: 18px; }
+      .social-icon svg { width: 17px; height: 17px; }
       .social-info h3 { font-size: 12px; }
       .social-info p { font-size: 9px; }
-      .social-arrow { font-size: 15px; }
+      .social-arrow { font-size: 12px; }
 
-      .music-feature {
-        grid-template-columns: 1fr;
-        gap: 22px;
-        padding: 27px 22px;
+      .story-layout { grid-template-columns: 1fr; gap: 24px; }
+      .story-side { position: static; }
+      .story-side h2 { font-size: 42px; }
+      .story-card { padding: 22px 19px; }
+      .story-card p { font-size: 12px; }
+
+      .info-panel { padding: 23px 19px; }
+      .info-top h3 { font-size: 19px; }
+
+      .quiz-top { padding: 18px; }
+      .quiz-content { padding: 22px 17px; }
+      .quiz-options { grid-template-columns: 1fr; gap: 9px; }
+      .quiz-option { min-height: 56px; padding: 11px; }
+      .quiz-category { margin-top: 23px; }
+      .quiz-bottom { align-items: stretch; }
+      .quiz-bottom .button { width: 100%; }
+      .quiz-footnote { max-width: none; }
+
+      .ticket-card { grid-template-columns: 1fr; gap: 21px; }
+      .ticket-action {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 14px;
+        text-align: left;
+        padding: 15px;
       }
 
-      .music-feature h3 { font-size: 28px; }
-      .music-action .button { width: 100%; }
+      .ticket-action .ticket-icon { font-size: 25px; }
+      .ticket-action strong { margin-top: 0; }
+      .ticket-action small { margin-top: 4px; }
 
-      .story-layout { grid-template-columns: 1fr; gap: 27px; }
-      .story-side { position: static; }
-      .story-side h2 { font-size: 43px; }
-      .story-side > p { max-width: 470px; }
-      .story-card { padding: 23px 20px; }
-      .story-card p { font-size: 12px; line-height: 1.95; }
-      .story-quote { padding: 17px; }
-
-      .info-panel { padding: 25px 20px; border-radius: 19px; }
-      .info-top h3 { font-size: 20px; }
-      .info-copy { font-size: 12px; }
-      .info-panel::after { font-size: 150px; }
-
-      .ending { padding: 42px 0 70px; }
-      .ending-box { border-radius: 20px; }
-      .footer-inner { justify-content: center; padding: 23px 0; text-align: center; }
+      .ending { padding-bottom: 60px; }
+      .footer-inner { justify-content: center; padding: 22px 0; text-align: center; }
       .footer-copy { width: 100%; order: 3; }
     }
 
     @media (max-width: 370px) {
-      .hero-title { font-size: 49px; }
+      .hero-title { font-size: 48px; }
       .social-grid { grid-template-columns: 1fr; }
-      .social-card { min-height: 86px; padding: 14px; }
+      .social-card { min-height: 84px; padding: 13px; }
       .hero-actions { flex-direction: column; }
       .hero-actions .button { width: 100%; }
     }
@@ -1164,158 +1388,158 @@
 </head>
 
 <body>
-  <div class="intro" aria-hidden="true">
-    <div class="intro-inner">
-      <div class="intro-clover">🍀</div>
-      <div class="intro-wordmark">LEVIZ<span>PG</span></div>
-      <div class="intro-line"></div>
+  <!-- Este elemento está fuera del contenido para que permanezca fijo al hacer scroll. -->
+  <div class="clover-background" aria-hidden="true">
+    <div class="clover-aura"></div>
+    <div class="clover-rotator">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="leafFill" cx="28%" cy="23%" r="90%">
+            <stop offset="0%" stop-color="#c2ffda"/>
+            <stop offset="45%" stop-color="#47e986"/>
+            <stop offset="100%" stop-color="#13713a"/>
+          </radialGradient>
+          <filter id="leafGlow" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+
+        <g fill="url(#leafFill)" stroke="#8bffb0" stroke-opacity=".55" stroke-width="1.2" filter="url(#leafGlow)">
+          <path d="M200 200 C165 177 118 151 124 105 C129 70 167 53 194 82 C215 49 258 61 270 95 C289 144 238 178 200 200Z"/>
+          <path d="M200 200 C165 177 118 151 124 105 C129 70 167 53 194 82 C215 49 258 61 270 95 C289 144 238 178 200 200Z" transform="rotate(90 200 200)"/>
+          <path d="M200 200 C165 177 118 151 124 105 C129 70 167 53 194 82 C215 49 258 61 270 95 C289 144 238 178 200 200Z" transform="rotate(180 200 200)"/>
+          <path d="M200 200 C165 177 118 151 124 105 C129 70 167 53 194 82 C215 49 258 61 270 95 C289 144 238 178 200 200Z" transform="rotate(270 200 200)"/>
+        </g>
+
+        <g fill="none" stroke="#72ffa4" stroke-width="7" stroke-linecap="round">
+          <path d="M200 200 C204 239 222 278 251 315"/>
+        </g>
+
+        <g fill="none" stroke="#b8ffd0" stroke-opacity=".45" stroke-width="1.2">
+          <path d="M200 200 C176 172 158 140 156 106"/>
+          <path d="M200 200 C228 177 254 159 280 151"/>
+          <path d="M200 200 C228 224 246 249 251 279"/>
+          <path d="M200 200 C172 225 149 247 133 270"/>
+        </g>
+
+        <circle cx="200" cy="200" r="6" fill="#b8ffd0"/>
+        <circle cx="200" cy="200" r="13" fill="none" stroke="#b8ffd0" stroke-opacity=".28"/>
+      </svg>
     </div>
   </div>
 
   <div class="ambient ambient-a" aria-hidden="true"></div>
   <div class="ambient ambient-b" aria-hidden="true"></div>
 
-  <header class="topbar">
-    <nav class="nav container" aria-label="Navegación principal">
-      <a class="brand" href="#inicio" aria-label="Leviz PG, inicio">
-        <span class="brand-clover">🍀</span>
-        <span class="brand-name">LEVIZ<span>PG</span></span>
-      </a>
-
-      <div class="nav-links">
-        <a href="#musica">Música</a>
-        <a href="#historia">Mi historia</a>
-        <a href="#info">El proyecto</a>
-      </div>
-
-      <a class="nav-button" href="#plataformas">MIS PLATAFORMAS <span>↗</span></a>
-    </nav>
-  </header>
-
-  <main>
-    <!-- HERO -->
-    <section class="hero" id="inicio">
-      <div class="clover-scene" aria-hidden="true">
-        <div class="orbit"></div>
-
-        <svg class="clover-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="leafFill" cx="28%" cy="23%" r="90%">
-              <stop offset="0%" stop-color="#c2ffda" stop-opacity=".85"/>
-              <stop offset="48%" stop-color="#47e986" stop-opacity=".62"/>
-              <stop offset="100%" stop-color="#13713a" stop-opacity=".32"/>
-            </radialGradient>
-          </defs>
-
-          <g transform="rotate(0 200 200)">
-            <path class="leaf-shape leaf-wobble l1"
-              d="M200 200 C165 177 118 151 124 105 C129 70 167 53 194 82 C215 49 258 61 270 95 C289 144 238 178 200 200 Z"/>
-          </g>
-
-          <g transform="rotate(90 200 200)">
-            <path class="leaf-shape leaf-wobble l2"
-              d="M200 200 C165 177 118 151 124 105 C129 70 167 53 194 82 C215 49 258 61 270 95 C289 144 238 178 200 200 Z"/>
-          </g>
-
-          <g transform="rotate(180 200 200)">
-            <path class="leaf-shape leaf-wobble l3"
-              d="M200 200 C165 177 118 151 124 105 C129 70 167 53 194 82 C215 49 258 61 270 95 C289 144 238 178 200 200 Z"/>
-          </g>
-
-          <g transform="rotate(270 200 200)">
-            <path class="leaf-shape leaf-wobble l4"
-              d="M200 200 C165 177 118 151 124 105 C129 70 167 53 194 82 C215 49 258 61 270 95 C289 144 238 178 200 200 Z"/>
-          </g>
-
-          <!-- Tallo fijo -->
-          <path class="stem" d="M200 200 C204 239 222 278 251 315"/>
-          <circle cx="200" cy="200" r="6" fill="#b8ffd0"/>
-        </svg>
-      </div>
-
-      <div class="hero-inner container">
-        <div class="hero-kicker">
-          <span class="live-dot"></span>
-          ARTISTA URBANO INDEPENDIENTE
-        </div>
-
-        <div class="hero-title-wrap">
-          <h1 class="hero-title">levizpg</h1>
-        </div>
-
-        <p class="hero-tagline">
-          El que le da la suerte <span>al trébol.</span>
-        </p>
-
-        <p class="hero-description">
-          Una historia real, un sueño sin límites y música que nace de lo vivido.
-          No espero a que la suerte llegue. Salgo a buscarla.
-        </p>
-
-        <div class="hero-actions">
-          <a class="button button-primary" href="#musica">
-            <span>♫</span> ENTRA EN MI UNIVERSO
-          </a>
-          <a class="button button-secondary" href="#historia">
-            CONOCE MI HISTORIA <span>↘</span>
-          </a>
-        </div>
-
-        <p class="hero-note">
-          INDEPENDIENTE POR ELECCIÓN <span>✦</span> IMPARABLE POR CONVICCIÓN
-        </p>
-      </div>
-
-      <a href="#musica" class="scroll-cue" aria-label="Explorar la página">
-        <span>DESLIZA PARA EXPLORAR</span>
-        <span class="scroll-line"></span>
-      </a>
-    </section>
-
-    <!-- TEXTO EN MOVIMIENTO -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track">
-        <div class="marquee-group">
-          <span>MÚSICA</span><span class="spark">✳</span>
-          <span>TRAP ALTERNATIVO</span><span class="spark">✳</span>
-          <span>HISTORIAS REALES</span><span class="spark">✳</span>
-          <span>LEVIZ PG</span><span class="spark">🍀</span>
-          <span>EL SUEÑO CONTINÚA</span><span class="spark">✳</span>
-        </div>
-        <div class="marquee-group">
-          <span>MÚSICA</span><span class="spark">✳</span>
-          <span>TRAP ALTERNATIVO</span><span class="spark">✳</span>
-          <span>HISTORIAS REALES</span><span class="spark">✳</span>
-          <span>LEVIZ PG</span><span class="spark">🍀</span>
-          <span>EL SUEÑO CONTINÚA</span><span class="spark">✳</span>
-        </div>
+  <div class="site-content">
+    <div class="intro" aria-hidden="true">
+      <div class="intro-inner">
+        <div class="intro-clover">🍀</div>
+        <div class="intro-wordmark">LEVIZ<span>PG</span></div>
+        <div class="intro-line"></div>
       </div>
     </div>
 
-    <!-- MÚSICA -->
-    <section class="section" id="musica">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">EL SONIDO DE LEVIZ</span>
-          <h2 class="section-title">
-            Dale play a <span class="accent">la historia.</span>
-          </h2>
-          <p class="section-subtitle">
-            Cada canción es una parte de mí. Escucha, comparte y acompáñame
-            mientras este sueño sigue creciendo.
+    <header class="topbar">
+      <nav class="nav container" aria-label="Navegación principal">
+        <a class="brand" href="#inicio" aria-label="Leviz PG, inicio">
+          <span class="brand-clover">🍀</span>
+          <span class="brand-name">LEVIZ<span>PG</span></span>
+        </a>
+
+        <div class="nav-links">
+          <a href="#musica">Música</a>
+          <a href="#historia">Historia</a>
+          <a href="#juego">Mini juego</a>
+          <a href="#tickets">Tickets</a>
+        </div>
+
+        <a class="nav-cta" href="#plataformas">MIS REDES ↗</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- INICIO -->
+      <section class="hero" id="inicio">
+        <div class="hero-inner container">
+          <div class="hero-kicker">
+            <span class="live-dot"></span>
+            ARTISTA URBANO INDEPENDIENTE
+          </div>
+
+          <div class="hero-title-wrap">
+            <h1 class="hero-title">levizpg</h1>
+          </div>
+
+          <p class="hero-tagline">
+            El que le da la suerte <span class="accent">al trébol.</span>
+          </p>
+
+          <p class="hero-description">
+            Una historia real, un sueño sin límites y música que nace de lo vivido.
+            No espero a que la suerte llegue. Salgo a buscarla.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#musica">♫ DESCUBRE MI MÚSICA</a>
+            <a class="button button-secondary" href="#historia">CONOCE MI HISTORIA ↘</a>
+          </div>
+
+          <p class="hero-note">
+            INDEPENDIENTE POR ELECCIÓN <span>✦</span> IMPARABLE POR CONVICCIÓN
           </p>
         </div>
 
-        <div class="music-feature reveal">
-          <div>
-            <span class="music-label"><span class="live-dot"></span> DESCUBRE MI MÚSICA</span>
-            <h3>El comienzo de algo grande.</h3>
-            <p>
-              Encuentra mis lanzamientos, escucha mi sonido y sé parte
-              de cada capítulo de este camino.
+        <a href="#musica" class="scroll-cue" aria-label="Explorar la página">
+          <span>DESLIZA PARA EXPLORAR</span>
+          <span class="scroll-line"></span>
+        </a>
+      </section>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <div class="marquee-group">
+            <span>MÚSICA</span><span class="spark">✳</span>
+            <span>TRAP ALTERNATIVO</span><span class="spark">✳</span>
+            <span>HISTORIAS REALES</span><span class="spark">🍀</span>
+            <span>LEVIZ PG</span><span class="spark">✳</span>
+            <span>LA SUERTE SE BUSCA</span><span class="spark">✳</span>
+          </div>
+          <div class="marquee-group">
+            <span>MÚSICA</span><span class="spark">✳</span>
+            <span>TRAP ALTERNATIVO</span><span class="spark">✳</span>
+            <span>HISTORIAS REALES</span><span class="spark">🍀</span>
+            <span>LEVIZ PG</span><span class="spark">✳</span>
+            <span>LA SUERTE SE BUSCA</span><span class="spark">✳</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MÚSICA -->
+      <section class="section" id="musica">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">EL SONIDO DE LEVIZ</span>
+            <h2 class="section-title">Dale play a <span class="accent">la historia.</span></h2>
+            <p class="section-subtitle">
+              Cada canción es una parte de mí. Escucha, comparte y acompáñame
+              mientras este sueño sigue creciendo.
             </p>
           </div>
-          <div class="music-action">
+
+          <div class="music-feature reveal">
+            <div>
+              <span class="music-label"><span class="live-dot"></span> DESCUBRE MI MÚSICA</span>
+              <h3>El comienzo de algo grande.</h3>
+              <p>
+                Encuentra mis lanzamientos, escucha mi sonido y sé parte
+                de cada capítulo de este camino.
+              </p>
+            </div>
             <a class="button button-primary"
                href="https://open.spotify.com/artist/2PIQTmPNz7CF5rsNk4gKiy?si=9y3L6dSLSp-4qJj7H3vxnw&utm_source=whatsapp"
                target="_blank" rel="noopener noreferrer">
@@ -1323,247 +1547,352 @@
             </a>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- PLATAFORMAS -->
-    <section class="section" id="plataformas">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">CONECTA CONMIGO</span>
-          <h2 class="section-title">
-            Encuéntrame <span class="accent">aquí.</span>
-          </h2>
-          <p class="section-subtitle">
-            Mi música, mis vídeos y todo lo que ocurre detrás del proyecto.
-            Elige tu plataforma favorita.
-          </p>
-        </div>
-
-        <div class="social-grid">
-          <a class="social-card reveal"
-             style="--social:#1ed760"
-             href="https://open.spotify.com/artist/2PIQTmPNz7CF5rsNk4gKiy?si=9y3L6dSLSp-4qJj7H3vxnw&utm_source=whatsapp"
-             target="_blank" rel="noopener noreferrer">
-            <span class="social-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.59 14.42a.75.75 0 0 1-1.03.25c-2.82-1.72-6.37-2.11-10.55-1.16a.75.75 0 1 1-.33-1.46c4.58-1.05 8.51-.6 11.66 1.34.36.22.47.69.25 1.03Zm1.47-3.27a.94.94 0 0 1-1.29.31c-3.23-1.98-8.15-2.55-11.97-1.4a.94.94 0 1 1-.54-1.8c4.37-1.32 9.8-.68 13.49 1.6.44.27.58.85.31 1.29Zm.13-3.4c-3.87-2.3-10.26-2.51-13.96-1.39a1.13 1.13 0 0 1-.66-2.16c4.25-1.29 11.32-1.04 15.78 1.61a1.13 1.13 0 0 1-1.16 1.94Z"/></svg>
-            </span>
-            <span class="social-info">
-              <h3>Spotify</h3>
-              <p>Escucha mi música</p>
-            </span>
-            <span class="social-arrow">↗</span>
-          </a>
-
-          <a class="social-card reveal"
-             style="--social:#ff5b5b"
-             href="https://youtube.com/@leviz_pg?si=oxVT2Fh2MFXYjkMm"
-             target="_blank" rel="noopener noreferrer">
-            <span class="social-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.12C19.55 3.56 12 3.56 12 3.56s-7.55 0-9.4.52A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.12c1.85.52 9.4.52 9.4.52s7.55 0 9.4-.52a3 3 0 0 0 2.1-2.12A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.55 15.56V8.44L15.82 12l-6.27 3.56Z"/></svg>
-            </span>
-            <span class="social-info">
-              <h3>YouTube</h3>
-              <p>Vídeos y estrenos</p>
-            </span>
-            <span class="social-arrow">↗</span>
-          </a>
-
-          <a class="social-card reveal"
-             style="--social:#ff91e6"
-             href="https://www.tiktok.com/@leviz_elcl8ver?lang=es-419"
-             target="_blank" rel="noopener noreferrer">
-            <span class="social-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.35V2h-3.96v13.67a2.9 2.9 0 0 1-2.9 2.75 2.9 2.9 0 0 1 0-5.8c.3 0 .59.05.86.13V8.71a7 7 0 1 0 6 6.94V8.72a8.75 8.75 0 0 0 5.12 1.65V6.43a4.86 4.86 0 0 1-1.35.26Z"/></svg>
-            </span>
-            <span class="social-info">
-              <h3>TikTok</h3>
-              <p>Clips y novedades</p>
-            </span>
-            <span class="social-arrow">↗</span>
-          </a>
-
-          <a class="social-card reveal"
-             style="--social:#e79aff"
-             href="https://www.instagram.com/leviz_pg/"
-             target="_blank" rel="noopener noreferrer">
-            <span class="social-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm0 2A3.8 3.8 0 0 0 4 7.8v8.4A3.8 3.8 0 0 0 7.8 20h8.4a3.8 3.8 0 0 0 3.8-3.8V7.8A3.8 3.8 0 0 0 16.2 4H7.8ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-3.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/></svg>
-            </span>
-            <span class="social-info">
-              <h3>Instagram</h3>
-              <p>Mi día a día</p>
-            </span>
-            <span class="social-arrow">↗</span>
-          </a>
-
-          <a class="social-card reveal"
-             style="--social:#ff83bd"
-             href="https://music.apple.com/us/artist/elviscocho/1812816695"
-             target="_blank" rel="noopener noreferrer">
-            <span class="social-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M19.1 2.5c-1.4.1-3.1 1-4.1 2.1-.9 1-1.7 2.5-1.5 4 .1.1.2.1.3.1 1.4 0 3-.9 4-2 .9-1 1.6-2.5 1.4-4-.1-.1-.1-.1-.1-.2ZM19.1 9c-2.2 0-3.2 1.3-4.8 1.3-1.7 0-3-1.3-4.9-1.3-2.6 0-5.3 2.2-5.3 6.1 0 2.5.9 5.1 2.1 6.9.9 1.3 1.7 2.4 2.9 2.4 1 0 1.5-.7 3-.7s2 .7 3.1.7c1.2 0 2-1.1 2.9-2.3.7-1 1-1.5 1.5-2.6-3.9-1.5-4.5-7.1-.5-9.1Z"/></svg>
-            </span>
-            <span class="social-info">
-              <h3>Apple Music</h3>
-              <p>Escucha en Apple</p>
-            </span>
-            <span class="social-arrow">↗</span>
-          </a>
-
-          <a class="social-card reveal"
-             style="--social:#54c9ff"
-             href="https://t.me/Elviscocho_beat"
-             target="_blank" rel="noopener noreferrer">
-            <span class="social-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M21.8 4.2 18.6 20c-.24 1.12-.9 1.4-1.83.88l-5.06-3.73-2.44 2.35c-.27.27-.5.5-1.02.5l.36-5.15 9.38-8.48c.4-.36-.09-.56-.62-.2L5.78 13.5.8 11.94c-1.08-.34-1.1-1.08.23-1.6L20.5 2.8c.9-.34 1.68.22 1.3 1.4Z"/></svg>
-            </span>
-            <span class="social-info">
-              <h3>Telegram</h3>
-              <p>Conecta conmigo</p>
-            </span>
-            <span class="social-arrow">↗</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- HISTORIA -->
-    <section class="section" id="historia">
-      <div class="container">
-        <div class="story-layout">
-          <div class="story-side reveal">
-            <span class="story-symbol">🍀</span>
-            <span class="eyebrow">DE DÓNDE VENGO</span>
-            <h2>Detrás del nombre, <span>hay una historia.</span></h2>
-            <p>
-              Antes de cada canción hay una experiencia.
-              Antes de cada sueño, una decisión.
-              Esta historia apenas comienza a escribirse.
+      <!-- PLATAFORMAS -->
+      <section class="section" id="plataformas">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">CONECTA CONMIGO</span>
+            <h2 class="section-title">Encuéntrame <span class="accent">aquí.</span></h2>
+            <p class="section-subtitle">
+              Música, vídeos y todo lo que ocurre detrás del proyecto.
+              Elige tu plataforma favorita.
             </p>
-            <div class="story-rule"></div>
           </div>
 
-          <article class="story-card reveal">
-            <p>
-              Hola a toda mi gente linda 🍀🔥. Soy <strong>Leviz</strong> y soy un
-              artista urbano independiente de Cuba. Vengo a compartir mi sueño
-              con ustedes y que formen parte de este lindo proceso... pero antes
-              quisiera contarles un poco de mi historia.
-            </p>
+          <div class="social-grid">
+            <a class="social-card reveal" style="--social:#1ed760"
+               href="https://open.spotify.com/artist/2PIQTmPNz7CF5rsNk4gKiy?si=9y3L6dSLSp-4qJj7H3vxnw&utm_source=whatsapp"
+               target="_blank" rel="noopener noreferrer">
+              <span class="social-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.59 14.42a.75.75 0 0 1-1.03.25c-2.82-1.72-6.37-2.11-10.55-1.16a.75.75 0 1 1-.33-1.46c4.58-1.05 8.51-.6 11.66 1.34.36.22.47.69.25 1.03Zm1.47-3.27a.94.94 0 0 1-1.29.31c-3.23-1.98-8.15-2.55-11.97-1.4a.94.94 0 1 1-.54-1.8c4.37-1.32 9.8-.68 13.49 1.6.44.27.58.85.31 1.29Zm.13-3.4c-3.87-2.3-10.26-2.51-13.96-1.39a1.13 1.13 0 0 1-.66-2.16c4.25-1.29 11.32-1.04 15.78 1.61a1.13 1.13 0 0 1-1.16 1.94Z"/></svg>
+              </span>
+              <span class="social-info"><h3>Spotify</h3><p>Escucha mi música</p></span>
+              <span class="social-arrow">↗</span>
+            </a>
 
-            <p>
-              Siempre estuve aferrado a la música, pero desde los 14 años hubo
-              un ligero cambio en mi sueño, pues era ser baterista yyy debido a
-              mi situación económica de ese entonces y la falta de oportunidades,
-              aparecieron en mi vida varios de mis referentes como
-              <strong>Milo J, Eladio Carrión, Bad Bunny y Luar La L.</strong>
-              Entonces me pregunté: ¿Será este el camino?
-            </p>
+            <a class="social-card reveal" style="--social:#ff5b5b"
+               href="https://youtube.com/@leviz_pg?si=oxVT2Fh2MFXYjkMm"
+               target="_blank" rel="noopener noreferrer">
+              <span class="social-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.12C19.55 3.56 12 3.56 12 3.56s-7.55 0-9.4.52A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.12c1.85.52 9.4.52 9.4.52s7.55 0 9.4-.52a3 3 0 0 0 2.1-2.12A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.55 15.56V8.44L15.82 12l-6.27 3.56Z"/></svg>
+              </span>
+              <span class="social-info"><h3>YouTube</h3><p>Vídeos y estrenos</p></span>
+              <span class="social-arrow">↗</span>
+            </a>
 
-            <p>
-              Bueno... no lo sabría hasta intentarlo, desde entonces supe que mi
-              sueño era salir un día al escenario y conectar con todos ustedes
-              a través de mis historias en su mayoría personales en forma de
-              canciones y demostrar a través de las mismas que la suerte no
-              existe como tal, sino que tú debes buscarla todos los días de
-              este mundo con trabajo duro, esfuerzo y dedicación...
-            </p>
+            <a class="social-card reveal" style="--social:#ff91e6"
+               href="https://www.tiktok.com/@leviz_elcl8ver?lang=es-419"
+               target="_blank" rel="noopener noreferrer">
+              <span class="social-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.35V2h-3.96v13.67a2.9 2.9 0 0 1-2.9 2.75 2.9 2.9 0 0 1 0-5.8c.3 0 .59.05.86.13V8.71a7 7 0 1 0 6 6.94V8.72a8.75 8.75 0 0 0 5.12 1.65V6.43a4.86 4.86 0 0 1-1.35.26Z"/></svg>
+              </span>
+              <span class="social-info"><h3>TikTok</h3><p>Clips y novedades</p></span>
+              <span class="social-arrow">↗</span>
+            </a>
 
-            <div class="story-quote">
-              Te lo dice «EL QUE LE DA LA SUERTE AL TRÉBOL» 🍀🔥
+            <a class="social-card reveal" style="--social:#e79aff"
+               href="https://www.instagram.com/leviz_pg/"
+               target="_blank" rel="noopener noreferrer">
+              <span class="social-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm0 2A3.8 3.8 0 0 0 4 7.8v8.4A3.8 3.8 0 0 0 7.8 20h8.4a3.8 3.8 0 0 0 3.8-3.8V7.8A3.8 3.8 0 0 0 16.2 4H7.8ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-3.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/></svg>
+              </span>
+              <span class="social-info"><h3>Instagram</h3><p>Mi día a día</p></span>
+              <span class="social-arrow">↗</span>
+            </a>
+
+            <a class="social-card reveal" style="--social:#ff83bd"
+               href="https://music.apple.com/us/artist/elviscocho/1812816695"
+               target="_blank" rel="noopener noreferrer">
+              <span class="social-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M19.1 2.5c-1.4.1-3.1 1-4.1 2.1-.9 1-1.7 2.5-1.5 4 .1.1.2.1.3.1 1.4 0 3-.9 4-2 .9-1 1.6-2.5 1.4-4-.1-.1-.1-.1-.1-.2ZM19.1 9c-2.2 0-3.2 1.3-4.8 1.3-1.7 0-3-1.3-4.9-1.3-2.6 0-5.3 2.2-5.3 6.1 0 2.5.9 5.1 2.1 6.9.9 1.3 1.7 2.4 2.9 2.4 1 0 1.5-.7 3-.7s2 .7 3.1.7c1.2 0 2-1.1 2.9-2.3.7-1 1-1.5 1.5-2.6-3.9-1.5-4.5-7.1-.5-9.1Z"/></svg>
+              </span>
+              <span class="social-info"><h3>Apple Music</h3><p>Escucha en Apple</p></span>
+              <span class="social-arrow">↗</span>
+            </a>
+
+            <a class="social-card reveal" style="--social:#54c9ff"
+               href="https://t.me/Elviscocho_beat"
+               target="_blank" rel="noopener noreferrer">
+              <span class="social-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M21.8 4.2 18.6 20c-.24 1.12-.9 1.4-1.83.88l-5.06-3.73-2.44 2.35c-.27.27-.5.5-1.02.5l.36-5.15 9.38-8.48c.4-.36-.09-.56-.62-.2L5.78 13.5.8 11.94c-1.08-.34-1.1-1.08.23-1.6L20.5 2.8c.9-.34 1.68.22 1.3 1.4Z"/></svg>
+              </span>
+              <span class="social-info"><h3>Telegram</h3><p>Conecta conmigo</p></span>
+              <span class="social-arrow">↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- HISTORIA -->
+      <section class="section" id="historia">
+        <div class="container">
+          <div class="story-layout">
+            <div class="story-side reveal">
+              <span class="story-symbol">🍀</span>
+              <span class="eyebrow">DE DÓNDE VENGO</span>
+              <h2>Detrás del nombre, <span class="accent">hay una historia.</span></h2>
+              <p>
+                Antes de cada canción hay una experiencia. Antes de cada sueño,
+                una decisión. Esta historia apenas comienza a escribirse.
+              </p>
+              <div class="story-rule"></div>
             </div>
-          </article>
-        </div>
-      </div>
-    </section>
 
-    <!-- PERFIL -->
-    <section class="section" id="info">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">EL PROYECTO</span>
-          <h2 class="section-title">¿Quién es <span class="accent">Leviz?</span></h2>
-          <p class="section-subtitle">
-            Una identidad artística independiente, un sonido en evolución
-            y una historia que merece ser contada.
-          </p>
-        </div>
+            <article class="story-card reveal">
+              <p>
+                Hola a toda mi gente linda 🍀🔥. Soy <strong>Leviz</strong> y soy
+                un artista urbano independiente de Cuba. Vengo a compartir mi
+                sueño con ustedes y que formen parte de este lindo proceso...
+                pero antes quisiera contarles un poco de mi historia.
+              </p>
 
-        <div class="info-panel reveal">
-          <div class="info-top">
-            <h3>Leviz PG · Perfil artístico</h3>
-            <span class="update-pill"><span></span> ACTUALIZACIÓN CADA 2 SEMANAS</span>
-          </div>
+              <p>
+                Siempre estuve aferrado a la música, pero desde los 14 años hubo
+                un ligero cambio en mi sueño, pues era ser baterista yyy debido
+                a mi situación económica de ese entonces y la falta de
+                oportunidades, aparecieron en mi vida varios de mis referentes
+                como <strong>Milo J, Eladio Carrión, Bad Bunny y Luar La L.</strong>
+                Entonces me pregunté: ¿Será este el camino?
+              </p>
 
-          <p class="info-copy">
-            <strong>Leviz PG</strong> es un cantante emergente y creador de
-            contenido cubano enfocado en la música urbana y el trap.
-            A través de sus canciones y su contenido digital, desarrolla una
-            identidad artística independiente con el objetivo de conectar con
-            quienes encuentran en la música una forma de expresar sus propias
-            experiencias.
-            <br><br>
-            En su canal oficial de YouTube comparte sus lanzamientos y propuestas
-            audiovisuales, entre ellas <strong>«MUSA»</strong> y
-            <strong>«MÍRAME»</strong>. Su trayectoria también está vinculada al
-            seudónimo <strong>Elviscocho</strong>, asociado a trabajos como
-            <strong>«Momentum»</strong> y <strong>«Joven Millonario»</strong>.
-            <br><br>
-            Como artista independiente, Leviz continúa construyendo su presencia
-            dentro de la escena alternativa del trap, trabajando en su sonido,
-            su identidad y el vínculo con su comunidad.
-          </p>
+              <p>
+                Bueno... no lo sabría hasta intentarlo, desde entonces supe que
+                mi sueño era salir un día al escenario y conectar con todos
+                ustedes a través de mis historias en su mayoría personales en
+                forma de canciones y demostrar a través de las mismas que la
+                suerte no existe como tal, sino que tú debes buscarla todos los
+                días de este mundo con trabajo duro, esfuerzo y dedicación...
+              </p>
 
-          <div class="info-tags">
-            <span class="info-tag">♫ Música urbana</span>
-            <span class="info-tag">♬ Trap alternativo</span>
-            <span class="info-tag">✦ Artista independiente</span>
-            <span class="info-tag">🍀 Leviz PG</span>
+              <div class="story-quote">
+                Te lo dice «EL QUE LE DA LA SUERTE AL TRÉBOL» 🍀🔥
+              </div>
+            </article>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- CIERRE -->
-    <section class="ending">
-      <div class="container">
-        <div class="ending-box reveal">
-          <span class="ending-clover">🍀</span>
-          <span class="eyebrow">EL CAMINO CONTINÚA</span>
-          <h2>La suerte no se espera.<br><span>Se busca.</span></h2>
-          <p>
-            Gracias por formar parte de este sueño.
-            Nos vemos en la música. Lo mejor todavía está por venir.
-          </p>
-          <a class="button button-primary"
-             href="https://youtube.com/@leviz_pg?si=oxVT2Fh2MFXYjkMm"
-             target="_blank" rel="noopener noreferrer">
-            DESCUBRE MI MUNDO ↗
-          </a>
+      <!-- PERFIL DEL ARTISTA -->
+      <section class="section" id="info">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">EL PROYECTO</span>
+            <h2 class="section-title">¿Quién es <span class="accent">Leviz?</span></h2>
+            <p class="section-subtitle">
+              Una identidad artística independiente, un sonido en evolución
+              y una historia que merece ser contada.
+            </p>
+          </div>
+
+          <div class="info-panel reveal">
+            <div class="info-top">
+              <h3>Leviz PG · Perfil artístico</h3>
+              <span class="update-pill"><span></span> ACTUALIZACIÓN CADA 2 SEMANAS</span>
+            </div>
+
+            <p class="info-copy">
+              <strong>Leviz PG</strong> es un cantante emergente y creador de
+              contenido cubano enfocado en la música urbana y el trap.
+              A través de sus canciones y su contenido digital, desarrolla una
+              identidad artística independiente con el objetivo de conectar con
+              quienes encuentran en la música una forma de expresar sus propias
+              experiencias.
+              <br><br>
+              En su canal oficial de YouTube comparte sus lanzamientos y
+              propuestas audiovisuales, entre ellas <strong>«MUSA»</strong> y
+              <strong>«MÍRAME»</strong>. Su trayectoria también está vinculada
+              al seudónimo <strong>Elviscocho</strong>, asociado a trabajos como
+              <strong>«Momentum»</strong> y <strong>«Joven Millonario»</strong>.
+              <br><br>
+              Como artista independiente, Leviz continúa construyendo su
+              presencia dentro de la escena alternativa del trap, trabajando
+              en su sonido, su identidad y el vínculo con su comunidad.
+            </p>
+
+            <div class="info-tags">
+              <span class="info-tag">♫ Música urbana</span>
+              <span class="info-tag">♬ Trap alternativo</span>
+              <span class="info-tag">✦ Artista independiente</span>
+              <span class="info-tag">🍀 Leviz PG</span>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
 
-  <footer>
-    <div class="container footer-inner">
-      <a class="footer-brand" href="#inicio">LEVIZ<span>PG</span> 🍀</a>
-      <p class="footer-copy">
-        © <span id="year"></span> Leviz PG. Un sueño en construcción.
-      </p>
-      <a class="back-top" href="#inicio">VOLVER ARRIBA ↑</a>
-    </div>
-  </footer>
+      <!-- MINI JUEGO -->
+      <section class="section quiz-section" id="juego">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">PONTE A PRUEBA</span>
+            <h2 class="section-title">¿Cuánto conoces <span class="accent">a Leviz?</span></h2>
+            <p class="section-subtitle">
+              Has leído su historia. Ahora demuestra cuánto recuerdas.
+              Diez preguntas, cuatro opciones y solo una respuesta correcta por pregunta.
+            </p>
+          </div>
+
+          <div class="quiz-shell reveal" id="quiz">
+            <div class="quiz-top">
+              <div class="quiz-brand">
+                <div class="quiz-brand-icon">🍀</div>
+                <div>
+                  <strong>LEVIZ QUIZ</strong>
+                  <small>El reto del trébol</small>
+                </div>
+              </div>
+              <div class="quiz-score" id="scoreDisplay">PUNTOS: 0</div>
+            </div>
+
+            <div class="quiz-content" id="quizContent">
+              <div class="quiz-progress-meta">
+                <span id="questionCounter">PREGUNTA 1 DE 10</span>
+                <span id="progressPercent">10%</span>
+              </div>
+
+              <div class="quiz-progress-track">
+                <div class="quiz-progress-bar" id="progressBar"></div>
+              </div>
+
+              <span class="quiz-category" id="questionCategory">SU HISTORIA</span>
+              <h3 class="quiz-question" id="questionText">Cargando pregunta...</h3>
+              <p class="quiz-hint" id="questionHint">Lee con atención y elige tu respuesta.</p>
+
+              <div class="quiz-options" id="optionsContainer"></div>
+
+              <div class="quiz-feedback" id="feedback" aria-live="polite">
+                <h4 id="feedbackTitle"></h4>
+                <p id="feedbackText"></p>
+              </div>
+
+              <div class="quiz-bottom">
+                <p class="quiz-footnote">
+                  Las preguntas se basan en la información publicada en esta página.
+                  ¡Lee, recuerda y juega!
+                </p>
+                <button class="button button-primary quiz-next" id="nextButton" disabled>
+                  SIGUIENTE →
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-result" id="quizResult" aria-live="polite">
+              <div class="result-icon" id="resultIcon">🍀</div>
+              <div class="result-kicker">RETO COMPLETADO</div>
+              <h3 class="result-title" id="resultTitle">Tu resultado</h3>
+              <div class="result-score" id="finalScore"></div>
+              <p class="result-description" id="resultDescription"></p>
+
+              <div class="result-actions">
+                <button class="button button-primary" id="restartButton">
+                  VOLVER A JUGAR ↻
+                </button>
+                <a class="button button-secondary" href="#historia">
+                  REPASAR LA HISTORIA ↗
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TICKETS -->
+      <section class="tickets-section" id="tickets">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">EN VIVO · PRÓXIMAMENTE</span>
+            <h2 class="section-title">Nos vemos <span class="accent">en el escenario.</span></h2>
+            <p class="section-subtitle">
+              La música también se vive en persona. Este espacio estará preparado
+              para cuando lleguen los próximos conciertos.
+            </p>
+          </div>
+
+          <div class="ticket-card reveal">
+            <div class="ticket-copy">
+              <span class="ticket-label">✦ EXPERIENCIA LEVIZ PG</span>
+              <h3>Tu próximo concierto<br>puede estar más cerca.</h3>
+              <p>
+                Estamos preparando el espacio para los futuros eventos de Leviz PG.
+                Por el momento, la venta de entradas todavía no está habilitada.
+                Cuando haya novedades, el artista las anunciará oficialmente
+                a través de sus redes sociales.
+              </p>
+
+              <div class="ticket-status">
+                <span></span> VENTA DE TICKETS NO HABILITADA
+              </div>
+
+              <p class="ticket-disclaimer">
+                Mantente al tanto en
+                <a href="https://www.instagram.com/leviz_pg/" target="_blank" rel="noopener noreferrer">Instagram</a>,
+                <a href="https://youtube.com/@leviz_pg?si=oxVT2Fh2MFXYjkMm" target="_blank" rel="noopener noreferrer">YouTube</a>
+                y
+                <a href="https://www.tiktok.com/@leviz_elcl8ver?lang=es-419" target="_blank" rel="noopener noreferrer">TikTok</a>.
+                Compra entradas únicamente cuando se anuncien los canales oficiales de venta.
+              </p>
+            </div>
+
+            <div class="ticket-action" aria-label="Entradas próximamente">
+              <div class="ticket-icon">🎟️</div>
+              <div>
+                <strong>Tickets oficiales</strong>
+                <small>Próximamente<br>Estate pendiente de las novedades</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CIERRE -->
+      <section class="ending">
+        <div class="container">
+          <div class="ending-box reveal">
+            <span class="ending-clover">🍀</span>
+            <span class="eyebrow">EL CAMINO CONTINÚA</span>
+            <h2>La suerte no se espera.<br><span class="accent">Se busca.</span></h2>
+            <p>
+              Gracias por formar parte de este sueño.
+              Nos vemos en la música. Lo mejor todavía está por venir.
+            </p>
+            <a class="button button-primary"
+               href="https://youtube.com/@leviz_pg?si=oxVT2Fh2MFXYjkMm"
+               target="_blank" rel="noopener noreferrer">
+              DESCUBRE MI MUNDO ↗
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-inner">
+        <a class="footer-brand" href="#inicio">LEVIZ<span>PG</span> 🍀</a>
+        <p class="footer-copy">© <span id="year"></span> Leviz PG. Un sueño en construcción.</p>
+        <a class="back-top" href="#inicio">VOLVER ARRIBA ↑</a>
+      </div>
+    </footer>
+  </div>
 
   <script>
     // Año automático.
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Reveal progresivo de secciones.
+    // Ocultar la intro después de su animación.
+    const intro = document.querySelector(".intro");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (intro && reduceMotion.matches) {
+      intro.remove();
+    } else if (intro) {
+      window.setTimeout(() => intro.remove(), 2400);
+    }
+
+    // Animaciones al aparecer las secciones.
     const revealItems = document.querySelectorAll(".reveal");
 
-    if ("IntersectionObserver" in window) {
+    if ("IntersectionObserver" in window && !reduceMotion.matches) {
       const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -1571,28 +1900,308 @@
             observer.unobserve(entry.target);
           }
         });
-      }, {
-        threshold: 0.12,
-        rootMargin: "0px 0px -25px 0px"
+      }, { threshold: 0.1, rootMargin: "0px 0px -25px 0px" });
+
+      revealItems.forEach(item => revealObserver.observe(item));
+    } else {
+      revealItems.forEach(item => item.classList.add("visible"));
+    }
+
+    // =================================================
+    // JUEGO: preguntas basadas en el contenido de la web
+    // =================================================
+
+    const questions = [
+      {
+        category: "Su historia",
+        question: "¿De qué país es Leviz?",
+        hint: "La respuesta aparece en su presentación personal.",
+        options: ["República Dominicana", "Cuba", "Puerto Rico", "Colombia"],
+        correct: 1,
+        explanation: "Leviz se presenta como un artista urbano independiente de Cuba."
+      },
+      {
+        category: "Sus comienzos",
+        question: "¿Qué quería ser Leviz antes de enfocarse en su sueño musical actual?",
+        hint: "Recuerda el cambio de sueño que cuenta en su historia.",
+        options: ["Productor musical", "Guitarrista", "Baterista", "DJ de música electrónica"],
+        correct: 2,
+        explanation: "En su historia cuenta que su sueño era ser baterista."
+      },
+      {
+        category: "Sus influencias",
+        question: "¿Cuál de estos artistas NO aparece mencionado entre sus referentes?",
+        hint: "Repasa los nombres que aparecen en su historia.",
+        options: ["Milo J", "Eladio Carrión", "Luar La L", "Anuel AA"],
+        correct: 3,
+        explanation: "Milo J, Eladio Carrión, Bad Bunny y Luar La L aparecen mencionados. Anuel AA no figura en esa lista."
+      },
+      {
+        category: "Su identidad",
+        question: "¿Qué frase está asociada a la identidad de Leviz?",
+        hint: "Está presente en el inicio y al final de la historia.",
+        options: [
+          "El rey de la nueva generación",
+          "El que le da la suerte al trébol",
+          "El sonido de las calles",
+          "El futuro del reguetón"
+        ],
+        correct: 1,
+        explanation: "Su frase característica es «EL QUE LE DA LA SUERTE AL TRÉBOL»."
+      },
+      {
+        category: "Su filosofía",
+        question: "Según su historia, ¿qué hay que hacer con la suerte?",
+        hint: "La idea principal aparece también en el cierre de la página.",
+        options: [
+          "Esperar el momento perfecto",
+          "Confiar únicamente en el destino",
+          "Buscarla con trabajo, esfuerzo y dedicación",
+          "Dejar que otras personas la encuentren"
+        ],
+        correct: 2,
+        explanation: "Su mensaje es que la suerte se busca todos los días con trabajo duro, esfuerzo y dedicación."
+      },
+      {
+        category: "Su música",
+        question: "¿Cuál de estos títulos aparece entre los trabajos audiovisuales mencionados en su perfil?",
+        hint: "Busca el apartado que habla de sus vídeos y lanzamientos.",
+        options: ["MUSA", "Destino Final", "Sin Mirar Atrás", "La Última Noche"],
+        correct: 0,
+        explanation: "El perfil de la página menciona «MUSA» y «MÍRAME»."
+      },
+      {
+        category: "Otro nombre",
+        question: "¿Qué seudónimo también se relaciona con la trayectoria descrita en la página?",
+        hint: "Aparece en el apartado del perfil artístico.",
+        options: ["Leviathan", "Elviscocho", "PG Records", "El Trébol Negro"],
+        correct: 1,
+        explanation: "El perfil también vincula su trayectoria con el seudónimo Elviscocho."
+      },
+      {
+        category: "Su proyecto",
+        question: "¿Qué tipo de artista se describe a Leviz como?",
+        hint: "La respuesta está en su presentación y en el perfil artístico.",
+        options: [
+          "Artista pop bajo una gran discográfica",
+          "Cantante de música clásica",
+          "Artista urbano independiente",
+          "Productor dedicado exclusivamente a bandas sonoras"
+        ],
+        correct: 2,
+        explanation: "La página presenta a Leviz como artista urbano independiente, enfocado en la música urbana y el trap."
+      },
+      {
+        category: "Sus redes",
+        question: "¿En qué plataforma puedes encontrar el canal oficial de vídeos de Leviz?",
+        hint: "Hay un enlace a cada una de sus plataformas.",
+        options: ["Pinterest", "YouTube", "Reddit", "Twitch"],
+        correct: 1,
+        explanation: "El enlace a su canal oficial de YouTube aparece en la sección de plataformas."
+      },
+      {
+        category: "Conciertos",
+        question: "Según la sección de tickets, ¿qué debes hacer para saber cuándo estarán disponibles?",
+        hint: "Lee el aviso de entradas al final de la página.",
+        options: [
+          "Comprar a través de cualquier revendedor",
+          "Esperar a que un fan publique un enlace",
+          "Escribir una fecha en el juego",
+          "Seguir los anuncios del artista en sus redes oficiales"
+        ],
+        correct: 3,
+        explanation: "La página aclara que la venta todavía no está habilitada y que Leviz anunciará novedades por sus redes oficiales."
+      }
+    ];
+
+    const quizContent = document.getElementById("quizContent");
+    const questionCounter = document.getElementById("questionCounter");
+    const progressPercent = document.getElementById("progressPercent");
+    const progressBar = document.getElementById("progressBar");
+    const questionCategory = document.getElementById("questionCategory");
+    const questionText = document.getElementById("questionText");
+    const questionHint = document.getElementById("questionHint");
+    const optionsContainer = document.getElementById("optionsContainer");
+    const feedback = document.getElementById("feedback");
+    const feedbackTitle = document.getElementById("feedbackTitle");
+    const feedbackText = document.getElementById("feedbackText");
+    const nextButton = document.getElementById("nextButton");
+    const scoreDisplay = document.getElementById("scoreDisplay");
+    const quizResult = document.getElementById("quizResult");
+    const resultIcon = document.getElementById("resultIcon");
+    const resultTitle = document.getElementById("resultTitle");
+    const finalScore = document.getElementById("finalScore");
+    const resultDescription = document.getElementById("resultDescription");
+    const restartButton = document.getElementById("restartButton");
+
+    let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
+    let quizQuestions = [];
+
+    // Mezcla las preguntas en cada partida para dar variedad.
+    function shuffleArray(array) {
+      const shuffled = [...array];
+
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+
+      return shuffled;
+    }
+
+    function startQuiz() {
+      currentQuestion = 0;
+      score = 0;
+      answered = false;
+      quizQuestions = shuffleArray(questions);
+
+      scoreDisplay.textContent = "PUNTOS: 0";
+      quizContent.style.display = "block";
+      quizResult.classList.remove("show");
+
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      answered = false;
+
+      const q = quizQuestions[currentQuestion];
+      const number = currentQuestion + 1;
+      const percent = Math.round((number / quizQuestions.length) * 100);
+
+      questionCounter.textContent = `PREGUNTA ${number} DE ${quizQuestions.length}`;
+      progressPercent.textContent = `${percent}%`;
+      progressBar.style.width = `${percent}%`;
+
+      questionCategory.textContent = q.category;
+      questionText.textContent = q.question;
+      questionHint.textContent = q.hint;
+
+      feedback.classList.remove("show");
+      feedbackTitle.textContent = "";
+      feedbackText.textContent = "";
+      optionsContainer.innerHTML = "";
+      nextButton.disabled = true;
+      nextButton.textContent = number === quizQuestions.length ? "VER RESULTADO ↗" : "SIGUIENTE →";
+
+      const letters = ["A", "B", "C", "D"];
+
+      q.options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "quiz-option";
+        button.innerHTML =
+          `<span class="option-letter">${letters[index]}</span>` +
+          `<span>${escapeHTML(option)}</span>`;
+
+        button.addEventListener("click", () => selectAnswer(index));
+        optionsContainer.appendChild(button);
+      });
+    }
+
+    // Evita interpretar los textos de las preguntas como HTML.
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[character]);
+    }
+
+    function selectAnswer(selectedIndex) {
+      if (answered) return;
+      answered = true;
+
+      const q = quizQuestions[currentQuestion];
+      const optionButtons = optionsContainer.querySelectorAll(".quiz-option");
+      const isCorrect = selectedIndex === q.correct;
+
+      optionButtons.forEach((button, index) => {
+        button.disabled = true;
+
+        if (index === q.correct) {
+          button.classList.add("correct");
+        } else if (index === selectedIndex) {
+          button.classList.add("incorrect");
+        }
       });
 
-      revealItems.forEach((item) => revealObserver.observe(item));
-    } else {
-      revealItems.forEach((item) => item.classList.add("visible"));
+      if (isCorrect) {
+        score++;
+        feedbackTitle.textContent = "¡Correcto! 🍀";
+        feedbackTitle.style.color = "#73ffa7";
+      } else {
+        feedbackTitle.textContent = "Esta vez no…";
+        feedbackTitle.style.color = "#ffaaaa";
+      }
+
+      feedbackText.textContent = q.explanation;
+      feedback.classList.add("show");
+
+      scoreDisplay.textContent = `PUNTOS: ${score}`;
+      nextButton.disabled = false;
     }
 
-    // Si el navegador indica que el visitante prefiere menos movimiento,
-    // la intro se oculta inmediatamente.
-    const intro = document.querySelector(".intro");
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    function showResult() {
+      quizContent.style.display = "none";
+      quizResult.classList.add("show");
 
-    if (intro && reduceMotion.matches) {
-      intro.remove();
-    } else if (intro) {
-      window.setTimeout(() => {
-        intro.remove();
-      }, 2400);
+      const total = quizQuestions.length;
+      const percentage = Math.round((score / total) * 100);
+
+      finalScore.textContent = `${score} / ${total} respuestas correctas · ${percentage}%`;
+
+      if (score === total) {
+        resultIcon.textContent = "👑";
+        resultTitle.textContent = "¡Leyenda del trébol!";
+        resultDescription.textContent =
+          "¡Perfecto! Conoces cada detalle de la historia de Leviz. Ahora te toca seguir acompañando el camino y descubrir lo que viene.";
+      } else if (score >= 7) {
+        resultIcon.textContent = "🍀";
+        resultTitle.textContent = "¡Conoces muy bien a Leviz!";
+        resultDescription.textContent =
+          "Has estado atento a su historia. Te faltaron algunos detalles, pero vas por muy buen camino.";
+      } else if (score >= 4) {
+        resultIcon.textContent = "✨";
+        resultTitle.textContent = "Vas por buen camino.";
+        resultDescription.textContent =
+          "Ya conoces una parte de la historia. Vuelve a leer los apartados y prueba otra vez para superar tu puntuación.";
+      } else {
+        resultIcon.textContent = "📖";
+        resultTitle.textContent = "Tu historia con Leviz empieza aquí.";
+        resultDescription.textContent =
+          "Ahora tienes una excusa para explorar la página, conocer sus comienzos y descubrir más sobre su música. ¡Inténtalo de nuevo!";
+      }
+
+      progressBar.style.width = "100%";
+      questionCounter.textContent = "RETO COMPLETADO";
+      progressPercent.textContent = "100%";
     }
+
+    nextButton.addEventListener("click", () => {
+      if (!answered) return;
+
+      if (currentQuestion < quizQuestions.length - 1) {
+        currentQuestion++;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    restartButton.addEventListener("click", () => {
+      startQuiz();
+      document.getElementById("quiz").scrollIntoView({
+        behavior: reduceMotion.matches ? "auto" : "smooth",
+        block: "start"
+      });
+    });
+
+    startQuiz();
   </script>
 </body>
 </html>
