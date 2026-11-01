@@ -5,33 +5,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#050806">
-  <meta name="description" content="Leviz PG — Artista urbano independiente. El que le da la suerte al trébol.">
-  <title>Leviz PG | Christmas Edition 🎄</title>
+  <meta name="description" content="Leviz PG — artista urbano independiente de Cuba. El que le da la suerte al trébol.">
+  <title>Leviz PG | Christmas Edition</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --bg: #050806;
-      --bg-soft: #0a120d;
-      --card: rgba(13, 25, 17, .78);
+      --bg-soft: #0a110d;
+      --panel: rgba(14, 25, 18, .72);
       --green: #73ffa7;
-      --green-2: #23d978;
-      --green-3: #c4f8d4;
-      --white: #f5fff7;
-      --muted: #9eafa3;
-      --red: #e84b5b;
-      --gold: #e5d49a;
-      --border: rgba(115, 255, 167, .15);
+      --green-dark: #23d978;
+      --green-pale: #c4f8d4;
+      --white: #f5fff8;
+      --muted: #a2b4a8;
+      --red: #c74351;
+      --red-light: #ff7884;
+      --border: rgba(137, 255, 176, .15);
+      --gold: #d9c58b;
       --radius: 22px;
     }
 
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     html {
@@ -43,11 +44,22 @@
       min-height: 100vh;
       overflow-x: hidden;
       background:
-        radial-gradient(ellipse at 50% 0%, rgba(25, 105, 56, .19), transparent 45%),
+        radial-gradient(ellipse at 50% 0%, rgba(22, 100, 53, .17), transparent 48%),
         var(--bg);
       color: var(--white);
       font-family: "DM Sans", sans-serif;
-      line-height: 1.6;
+      line-height: 1.7;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      opacity: .2;
+      background-image: radial-gradient(rgba(210, 255, 222, .12) .7px, transparent .7px);
+      background-size: 27px 27px;
     }
 
     a {
@@ -61,50 +73,50 @@
 
     ::selection {
       background: var(--green);
-      color: #031008;
+      color: #07110a;
     }
 
-    /* Fondo: trébol fijo que acompaña todo el recorrido */
-
+    /* TRÉBOL DECORATIVO: cuatro pétalos, tallo centrado y rotación.
+       Se conserva como elemento de fondo detrás del contenido. */
     .clover-background {
       position: fixed;
       inset: 0;
+      z-index: -1;
+      pointer-events: none;
       display: grid;
       place-items: center;
-      pointer-events: none;
-      z-index: 0;
       overflow: hidden;
+      opacity: .075;
     }
 
-    .clover-background svg {
-      width: min(85vw, 820px);
-      height: min(85vw, 820px);
-      opacity: .065;
-      filter: drop-shadow(0 0 35px rgba(35, 217, 120, .24));
+    .clover-art {
+      width: min(88vw, 800px);
+      height: min(88vw, 800px);
+      overflow: visible;
       animation: cloverRotate 100s linear infinite;
+      transform-origin: center;
     }
 
-    .ambient {
-      position: fixed;
-      width: 380px;
-      height: 380px;
-      border-radius: 50%;
-      filter: blur(100px);
-      opacity: .10;
-      pointer-events: none;
-      z-index: 0;
+    .clover-art .petal {
+      fill: var(--green);
+      stroke: var(--green-pale);
+      stroke-width: 2;
+      stroke-opacity: .28;
     }
 
-    .ambient.one {
-      top: 15%;
-      left: -200px;
-      background: var(--green-2);
+    .clover-art .vein {
+      fill: none;
+      stroke: var(--green-pale);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-opacity: .45;
     }
 
-    .ambient.two {
-      right: -220px;
-      top: 55%;
-      background: #1b8b49;
+    .clover-art .stem {
+      fill: none;
+      stroke: var(--green);
+      stroke-width: 23;
+      stroke-linecap: round;
     }
 
     @keyframes cloverRotate {
@@ -112,18 +124,16 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Luces navideñas superiores */
-
+    /* Luces navideñas discretas */
     .christmas-lights {
       position: fixed;
       z-index: 20;
       top: 0;
       left: 0;
       width: 100%;
-      height: 28px;
+      height: 22px;
       display: flex;
       justify-content: space-around;
-      align-items: flex-start;
       pointer-events: none;
       padding: 0 8px;
     }
@@ -131,105 +141,103 @@
     .christmas-lights::before {
       content: "";
       position: absolute;
+      top: 3px;
       left: 0;
       right: 0;
-      top: 0;
-      height: 10px;
-      border-top: 2px solid rgba(190, 211, 192, .55);
-      border-radius: 50%;
+      height: 1px;
+      background: rgba(190, 211, 194, .38);
     }
 
-    .christmas-lights span {
+    .light {
       position: relative;
-      width: 10px;
-      height: 14px;
-      margin-top: 7px;
+      width: 8px;
+      height: 11px;
       border-radius: 45% 45% 50% 50%;
+      margin-top: 7px;
       background: var(--green);
-      box-shadow: 0 0 12px currentColor, 0 0 25px currentColor;
-      animation: lightBlink 1.8s ease-in-out infinite alternate;
+      box-shadow: 0 0 10px currentColor;
+      animation: lightGlow 3s ease-in-out infinite alternate;
     }
 
-    .christmas-lights span:nth-child(3n) {
-      background: var(--red);
-      color: var(--red);
-      animation-delay: -.7s;
+    .light:nth-child(3n) {
+      background: var(--red-light);
+      color: var(--red-light);
+      animation-delay: .8s;
     }
 
-    .christmas-lights span:nth-child(3n + 1) {
+    .light:nth-child(3n + 1) {
+      background: var(--green);
+      color: var(--green);
+      animation-delay: 1.5s;
+    }
+
+    .light:nth-child(3n + 2) {
       background: var(--gold);
       color: var(--gold);
-      animation-delay: -1.2s;
+      animation-delay: .3s;
     }
 
-    .christmas-lights span:nth-child(3n + 2) {
-      color: var(--green);
+    @keyframes lightGlow {
+      from { opacity: .55; filter: brightness(.8); }
+      to { opacity: 1; filter: brightness(1.3); }
     }
-
-    @keyframes lightBlink {
-      from { opacity: .5; filter: brightness(.7); }
-      to { opacity: 1; filter: brightness(1.4); }
-    }
-
-    /* Nieve */
 
     #christmasSnow {
       position: fixed;
       inset: 0;
       width: 100%;
       height: 100%;
-      z-index: 2;
+      z-index: 15;
       pointer-events: none;
-      opacity: .65;
+      opacity: .55;
     }
 
-    .site-content {
-      position: relative;
-      z-index: 3;
-    }
-
-    /* Navegación */
-
+    /* NAVEGACIÓN */
     .topbar {
       position: sticky;
       top: 0;
-      z-index: 15;
+      z-index: 30;
       width: 100%;
-      border-bottom: 1px solid rgba(115, 255, 167, .09);
-      background: rgba(5, 8, 6, .78);
+      background: rgba(5, 8, 6, .82);
       backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
     }
 
     .nav-inner {
-      width: min(1120px, calc(100% - 40px));
-      min-height: 78px;
+      width: min(1160px, calc(100% - 40px));
+      min-height: 76px;
       margin: auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 25px;
+      gap: 24px;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 11px;
-      font-family: "Space Grotesk", sans-serif;
-      font-weight: 700;
-      letter-spacing: -.7px;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 900;
+      font-size: 1.03rem;
+      letter-spacing: -.6px;
     }
 
-    .brand-clover {
-      width: 35px;
-      height: 35px;
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(115, 255, 167, .4);
+      border-radius: 11px;
       color: var(--green);
-      filter: drop-shadow(0 0 9px rgba(115, 255, 167, .3));
-      animation: cloverBob 3s ease-in-out infinite;
+      background: rgba(115, 255, 167, .06);
+      box-shadow: 0 0 22px rgba(35, 217, 120, .08);
     }
 
-    @keyframes cloverBob {
-      0%, 100% { transform: translateY(0) rotate(-5deg); }
-      50% { transform: translateY(-4px) rotate(5deg); }
+    .brand-mark svg {
+      width: 21px;
+      height: 21px;
     }
 
     .brand span {
@@ -239,104 +247,155 @@
     .nav-links {
       display: flex;
       align-items: center;
-      flex-wrap: wrap;
       gap: 25px;
-      font-size: .84rem;
-      color: var(--muted);
     }
 
     .nav-links a {
+      position: relative;
+      color: #bdc9c0;
+      font-size: .84rem;
       transition: color .25s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: -7px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--green);
+      transition: width .25s ease;
     }
 
     .nav-links a:hover {
       color: var(--green);
     }
 
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
     .nav-cta {
-      padding: 10px 17px;
-      border: 1px solid rgba(115, 255, 167, .28);
+      padding: 10px 15px;
+      border: 1px solid rgba(115, 255, 167, .32);
       border-radius: 999px;
-      color: var(--green);
+      color: var(--green) !important;
       font-weight: 700;
-      transition: .25s ease;
+    }
+
+    .nav-cta::after {
+      display: none;
     }
 
     .nav-cta:hover {
-      color: #041008;
-      background: var(--green);
-      box-shadow: 0 0 25px rgba(115, 255, 167, .2);
+      background: rgba(115, 255, 167, .09);
     }
 
-    /* Elementos generales */
-
-    .container {
-      width: min(1080px, calc(100% - 40px));
-      margin-inline: auto;
-    }
-
-    section {
+    /* HERO */
+    .hero {
       position: relative;
-      padding: 105px 0;
-    }
-
-    .section-heading {
-      max-width: 700px;
-      margin: 0 auto 44px;
+      min-height: 660px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 24px 110px;
       text-align: center;
+      isolation: isolate;
     }
 
-    .eyebrow {
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse at 50% 38%, rgba(35, 217, 120, .13), transparent 42%),
+        radial-gradient(ellipse at 50% 100%, rgba(199, 67, 81, .06), transparent 35%);
+    }
+
+    .hero-content {
+      width: min(900px, 100%);
+      animation: heroEntrance 1s ease both;
+    }
+
+    @keyframes heroEntrance {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .season-label {
       display: inline-flex;
       align-items: center;
       gap: 9px;
-      margin-bottom: 15px;
-      color: var(--green);
-      font-size: .73rem;
-      font-weight: 800;
-      letter-spacing: 2.8px;
+      padding: 8px 14px;
+      margin-bottom: 26px;
+      border: 1px solid rgba(115, 255, 167, .2);
+      border-radius: 999px;
+      background: rgba(9, 24, 14, .6);
+      color: var(--green-pale);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: 2px;
       text-transform: uppercase;
     }
 
-    .eyebrow::before,
-    .eyebrow::after {
+    .season-label::before {
       content: "";
-      width: 18px;
-      height: 1px;
-      background: var(--green-2);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--red-light);
+      box-shadow: 0 0 12px rgba(255, 120, 132, .8);
     }
 
-    h2 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      line-height: 1.12;
-      letter-spacing: -1.8px;
+    .hero h1 {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(4rem, 12vw, 8.5rem);
+      font-weight: 900;
+      line-height: .95;
+      letter-spacing: -.085em;
+      color: var(--white);
+      text-shadow: 0 0 70px rgba(35, 217, 120, .13);
     }
 
-    h2 span {
+    .hero h1 span {
       color: var(--green);
     }
 
-    .section-description {
-      max-width: 620px;
-      margin: 17px auto 0;
-      color: var(--muted);
-      font-size: .98rem;
+    .hero-subtitle {
+      max-width: 600px;
+      margin: 27px auto 0;
+      color: #c1d0c5;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+    }
+
+    .hero-subtitle strong {
+      color: var(--green-pale);
+      font-weight: 700;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 13px;
+      margin-top: 35px;
     }
 
     .button {
       display: inline-flex;
-      justify-content: center;
       align-items: center;
-      gap: 10px;
-      min-height: 49px;
-      padding: 13px 22px;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 13px 21px;
       border: 1px solid transparent;
-      border-radius: 999px;
-      cursor: pointer;
-      font-weight: 800;
+      border-radius: 13px;
       font-size: .9rem;
-      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+      font-weight: 800;
+      transition: transform .25s ease, background .25s ease, border-color .25s ease, box-shadow .25s ease;
+      cursor: pointer;
     }
 
     .button:hover {
@@ -344,622 +403,595 @@
     }
 
     .button-primary {
+      color: #061009;
       background: var(--green);
-      color: #041008;
-      box-shadow: 0 0 25px rgba(35, 217, 120, .12);
+      box-shadow: 0 8px 30px rgba(35, 217, 120, .13);
     }
 
     .button-primary:hover {
-      background: #a2ffc3;
-      box-shadow: 0 0 35px rgba(35, 217, 120, .27);
+      background: #a0ffbf;
+      box-shadow: 0 12px 34px rgba(35, 217, 120, .22);
     }
 
     .button-secondary {
-      border-color: rgba(255, 255, 255, .15);
-      background: rgba(255, 255, 255, .035);
       color: var(--white);
+      border-color: rgba(255, 255, 255, .14);
+      background: rgba(255, 255, 255, .035);
     }
 
     .button-secondary:hover {
-      border-color: var(--green);
-      color: var(--green);
+      border-color: rgba(115, 255, 167, .45);
+      background: rgba(115, 255, 167, .06);
     }
 
-    /* Hero */
-
-    .hero {
-      min-height: 680px;
-      display: grid;
-      place-items: center;
-      padding: 120px 0 100px;
-      text-align: center;
-    }
-
-    .hero-inner {
-      max-width: 900px;
-      margin: auto;
-    }
-
-    .christmas-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 8px 14px;
-      margin-bottom: 25px;
-      border: 1px solid rgba(229, 212, 154, .23);
-      border-radius: 999px;
-      background: rgba(229, 212, 154, .045);
-      color: var(--gold);
-      font-size: .73rem;
-      font-weight: 800;
-      letter-spacing: 1.8px;
-      text-transform: uppercase;
-    }
-
-    .hero h1 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(4rem, 12vw, 8.7rem);
-      line-height: .94;
-      font-weight: 700;
-      letter-spacing: -7px;
-      overflow-wrap: anywhere;
-    }
-
-    .hero h1 span {
-      color: var(--green);
-      text-shadow: 0 0 50px rgba(35, 217, 120, .16);
-    }
-
-    .hero-subtitle {
-      margin-top: 26px;
-      font-size: clamp(1.05rem, 2.7vw, 1.45rem);
-      color: var(--green-3);
-      font-weight: 600;
-    }
-
-    .hero-description {
-      max-width: 600px;
-      margin: 18px auto 0;
-      color: var(--muted);
-      font-size: 1rem;
-    }
-
-    .hero-buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 13px;
-      margin-top: 34px;
-    }
-
-    .hero-clover {
-      display: block;
-      width: 54px;
-      height: 54px;
-      margin: 40px auto 0;
-      color: var(--green);
-      filter: drop-shadow(0 0 20px rgba(115, 255, 167, .25));
-      animation: cloverBob 3s ease-in-out infinite;
-    }
-
-    .scroll-note {
-      margin-top: 15px;
-      color: #728679;
-      font-size: .7rem;
+    .hero-note {
+      margin-top: 48px;
+      color: #7f9585;
+      font-size: .75rem;
       letter-spacing: 2px;
       text-transform: uppercase;
     }
 
-    /* Franja animada */
+    .hero-note span {
+      color: var(--red-light);
+    }
 
+    /* FRANJA */
     .marquee {
       overflow: hidden;
       padding: 16px 0;
-      border-top: 1px solid rgba(115, 255, 167, .13);
-      border-bottom: 1px solid rgba(115, 255, 167, .13);
-      background: rgba(17, 55, 31, .27);
+      border-top: 1px solid rgba(115, 255, 167, .12);
+      border-bottom: 1px solid rgba(115, 255, 167, .12);
+      background: rgba(12, 23, 15, .55);
     }
 
     .marquee-track {
       display: flex;
       width: max-content;
-      animation: marqueeMove 28s linear infinite;
+      animation: marqueeScroll 34s linear infinite;
     }
 
-    .marquee-track span {
-      padding: 0 27px;
-      color: var(--green-3);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: .8rem;
+    .marquee-group {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      padding-right: 26px;
+      white-space: nowrap;
+      color: #b4c8b9;
+      font-size: .76rem;
       font-weight: 700;
       letter-spacing: 2px;
-      white-space: nowrap;
+      text-transform: uppercase;
     }
 
-    .marquee-track span:nth-child(odd) {
-      color: var(--gold);
+    .marquee-group span {
+      color: var(--green);
     }
 
-    @keyframes marqueeMove {
-      from { transform: translateX(0); }
+    .marquee-group i {
+      color: var(--red-light);
+      font-style: normal;
+    }
+
+    @keyframes marqueeScroll {
       to { transform: translateX(-50%); }
     }
 
-    /* Tarjetas */
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
+    /* ESTRUCTURA GENERAL */
+    .section {
+      width: min(1100px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 105px 0;
     }
 
-    .glass-card {
+    .section-heading {
+      max-width: 680px;
+      margin-bottom: 40px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 13px;
+      color: var(--green);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    .section-heading h2 {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(2rem, 5vw, 3.7rem);
+      line-height: 1.1;
+      letter-spacing: -2px;
+      font-weight: 900;
+    }
+
+    .section-heading h2 span {
+      color: var(--green);
+    }
+
+    .section-heading p {
+      margin-top: 16px;
+      color: var(--muted);
+      max-width: 580px;
+    }
+
+    .panel {
       position: relative;
-      overflow: hidden;
-      padding: 28px;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      background: linear-gradient(145deg, rgba(16, 35, 22, .83), rgba(7, 13, 9, .86));
-      transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+      background: linear-gradient(145deg, rgba(17, 31, 21, .76), rgba(8, 13, 10, .8));
+      box-shadow: 0 22px 80px rgba(0, 0, 0, .15);
+      overflow: hidden;
     }
 
-    .glass-card::before {
+    .panel::before {
       content: "";
       position: absolute;
-      top: -100px;
-      right: -100px;
-      width: 170px;
-      height: 170px;
-      border-radius: 50%;
-      background: rgba(35, 217, 120, .08);
-      filter: blur(35px);
-      pointer-events: none;
+      top: 0;
+      left: 9%;
+      right: 9%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(115, 255, 167, .45), transparent);
     }
 
-    .glass-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(115, 255, 167, .4);
-      box-shadow: 0 15px 45px rgba(0, 0, 0, .2);
+    /* MÚSICA */
+    .music-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 20px;
     }
 
-    .card-icon {
+    .music-feature {
+      min-height: 310px;
+      padding: 35px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      background:
+        radial-gradient(ellipse at 100% 0%, rgba(35, 217, 120, .16), transparent 55%),
+        linear-gradient(145deg, rgba(16, 39, 23, .85), rgba(8, 13, 10, .95));
+    }
+
+    .music-symbol {
+      width: 58px;
+      height: 58px;
       display: grid;
       place-items: center;
-      width: 48px;
-      height: 48px;
-      margin-bottom: 20px;
-      border: 1px solid rgba(115, 255, 167, .17);
-      border-radius: 15px;
-      background: rgba(115, 255, 167, .07);
+      border-radius: 18px;
+      border: 1px solid rgba(115, 255, 167, .23);
+      background: rgba(115, 255, 167, .08);
       color: var(--green);
-      font-size: 1.3rem;
+      font-size: 1.7rem;
     }
 
-    .glass-card h3 {
-      margin-bottom: 10px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.18rem;
+    .music-feature h3 {
+      margin-top: 25px;
+      font-family: "Montserrat", sans-serif;
+      font-size: 2rem;
+      line-height: 1.2;
+      font-weight: 900;
     }
 
-    .glass-card p {
+    .music-feature p {
+      margin-top: 12px;
+      margin-bottom: 25px;
       color: var(--muted);
-      font-size: .91rem;
+      max-width: 400px;
     }
 
-    .card-link {
-      display: inline-block;
-      margin-top: 21px;
-      color: var(--green);
-      font-size: .84rem;
-      font-weight: 800;
-    }
-
-    .card-link:hover {
-      color: var(--green-3);
-    }
-
-    /* Historia */
-
-    .story-layout {
+    .music-links {
       display: grid;
-      grid-template-columns: .9fr 1.1fr;
-      gap: 55px;
+      gap: 12px;
+    }
+
+    .music-link {
+      display: flex;
       align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 20px 22px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .018);
+      transition: .25s ease;
+    }
+
+    .music-link:hover {
+      border-color: rgba(115, 255, 167, .45);
+      background: rgba(115, 255, 167, .045);
+      transform: translateX(3px);
+    }
+
+    .music-link strong {
+      display: block;
+      font-size: .95rem;
+    }
+
+    .music-link small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    .music-link .arrow {
+      color: var(--green);
+      font-size: 1.25rem;
+    }
+
+    /* HISTORIA */
+    .story-grid {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 24px;
+      align-items: stretch;
     }
 
     .story-art {
-      position: relative;
+      min-height: 380px;
       display: grid;
       place-items: center;
-      min-height: 350px;
-      overflow: hidden;
-      border: 1px solid rgba(115, 255, 167, .15);
-      border-radius: 28px;
       background:
-        radial-gradient(circle at 50% 45%, rgba(35, 217, 120, .2), transparent 48%),
-        linear-gradient(145deg, #102a19, #060a07);
-    }
-
-    .story-art::before {
-      content: "";
-      position: absolute;
-      inset: 16px;
-      border: 1px solid rgba(229, 212, 154, .13);
-      border-radius: 19px;
+        radial-gradient(circle at 50% 45%, rgba(35, 217, 120, .16), transparent 47%),
+        rgba(11, 20, 14, .7);
     }
 
     .story-art svg {
-      width: 170px;
-      height: 170px;
-      color: var(--green);
-      filter: drop-shadow(0 0 30px rgba(35, 217, 120, .25));
-      animation: cloverBob 4s ease-in-out infinite;
+      width: min(76%, 280px);
+      filter: drop-shadow(0 0 45px rgba(35, 217, 120, .13));
     }
 
-    .story-art-label {
-      position: absolute;
-      bottom: 35px;
-      color: var(--gold);
-      font-size: .7rem;
-      font-weight: 800;
-      letter-spacing: 3px;
+    .story-copy {
+      padding: 38px;
     }
 
-    .story-copy h2 {
-      margin-bottom: 22px;
+    .story-copy h3 {
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.7rem;
+      font-weight: 900;
+      line-height: 1.25;
     }
 
     .story-copy p {
-      margin-bottom: 16px;
-      color: var(--muted);
-      font-size: .97rem;
+      margin-top: 17px;
+      color: #aebeb3;
+      font-size: .95rem;
     }
 
     .story-copy strong {
-      color: var(--green-3);
+      color: var(--green-pale);
     }
 
     .quote {
-      margin-top: 25px;
-      padding: 16px 20px;
+      margin-top: 27px;
+      padding: 18px 20px;
       border-left: 3px solid var(--green);
       border-radius: 0 12px 12px 0;
       background: rgba(115, 255, 167, .055);
-      color: var(--green-3);
-      font-family: "Space Grotesk", sans-serif;
-      font-weight: 700;
+      color: var(--green-pale);
+      font-family: "Montserrat", sans-serif;
+      font-size: .92rem;
+      font-weight: 800;
+      letter-spacing: .7px;
     }
 
-    /* Redes */
+    /* PERFIL */
+    .profile-card {
+      padding: 38px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+    }
 
+    .profile-card h3 {
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.7rem;
+      font-weight: 900;
+    }
+
+    .profile-card p {
+      margin-top: 12px;
+      color: var(--muted);
+    }
+
+    .profile-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .stat {
+      padding: 20px;
+      border: 1px solid rgba(115, 255, 167, .12);
+      border-radius: 15px;
+      background: rgba(115, 255, 167, .025);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--green);
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    /* REDES */
     .social-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 15px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
     }
 
     .social-card {
       display: flex;
       align-items: center;
-      gap: 15px;
-      min-width: 0;
-      padding: 20px;
+      gap: 14px;
+      padding: 21px;
       border: 1px solid var(--border);
-      border-radius: 18px;
-      background: rgba(11, 23, 15, .75);
-      transition: .25s ease;
+      border-radius: 17px;
+      background: rgba(13, 22, 16, .68);
+      transition: transform .25s ease, border-color .25s ease, background .25s ease;
     }
 
     .social-card:hover {
       transform: translateY(-4px);
       border-color: rgba(115, 255, 167, .45);
-      background: rgba(20, 49, 29, .7);
+      background: rgba(25, 48, 31, .55);
     }
 
     .social-icon {
-      display: grid;
-      flex: 0 0 45px;
-      place-items: center;
-      width: 45px;
-      height: 45px;
-      border-radius: 14px;
-      background: rgba(115, 255, 167, .08);
-      color: var(--green);
-      font-size: 1.1rem;
-      font-weight: 800;
-    }
-
-    .social-card h3 {
-      font-size: .95rem;
-    }
-
-    .social-card p {
-      margin-top: 3px;
-      color: var(--muted);
-      font-size: .76rem;
-      overflow-wrap: anywhere;
-    }
-
-    /* Perfil */
-
-    .profile-panel {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 35px;
-      align-items: center;
-      padding: 38px;
-      border: 1px solid rgba(115, 255, 167, .18);
-      border-radius: 28px;
-      background:
-        radial-gradient(ellipse at 100% 0%, rgba(35, 217, 120, .11), transparent 50%),
-        rgba(10, 20, 13, .85);
-    }
-
-    .profile-panel h2 {
-      margin-bottom: 20px;
-    }
-
-    .profile-panel p {
-      color: var(--muted);
-      margin-bottom: 14px;
-    }
-
-    .profile-stamp {
+      flex: 0 0 42px;
+      height: 42px;
       display: grid;
       place-items: center;
-      min-height: 250px;
-      border-radius: 22px;
-      background: linear-gradient(145deg, rgba(35, 217, 120, .12), rgba(5, 8, 6, .5));
-      border: 1px solid rgba(115, 255, 167, .12);
-      text-align: center;
-    }
-
-    .profile-stamp svg {
-      width: 105px;
-      height: 105px;
+      border-radius: 13px;
       color: var(--green);
-      filter: drop-shadow(0 0 25px rgba(115, 255, 167, .2));
+      background: rgba(115, 255, 167, .075);
+      font-family: "Montserrat", sans-serif;
+      font-weight: 900;
     }
 
-    .profile-stamp strong {
+    .social-card strong {
       display: block;
-      margin-top: 12px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.6rem;
-      letter-spacing: 2px;
+      font-size: .9rem;
     }
 
-    .profile-stamp small {
-      color: var(--gold);
-      font-size: .68rem;
-      letter-spacing: 3px;
+    .social-card small {
+      color: var(--muted);
+      font-size: .74rem;
     }
 
-    /* Quiz */
-
-    .quiz-shell {
-      max-width: 760px;
-      margin: auto;
-      padding: 32px;
-      border: 1px solid rgba(115, 255, 167, .19);
-      border-radius: 26px;
-      background: rgba(9, 19, 12, .88);
-      box-shadow: 0 25px 80px rgba(0, 0, 0, .16);
+    /* QUIZ */
+    .quiz-panel {
+      padding: clamp(22px, 5vw, 42px);
     }
 
     .quiz-top {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       gap: 15px;
-      margin-bottom: 20px;
-      color: var(--muted);
-      font-size: .82rem;
+      margin-bottom: 23px;
     }
 
-    .quiz-progress {
+    .quiz-top h3 {
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.25rem;
+      font-weight: 900;
+    }
+
+    .quiz-count {
+      color: var(--green);
+      font-size: .82rem;
+      font-weight: 800;
+    }
+
+    .progress-track {
       width: 100%;
       height: 5px;
-      margin-bottom: 30px;
+      margin-bottom: 27px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, .07);
       overflow: hidden;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, .08);
     }
 
-    .quiz-progress-bar {
-      width: 10%;
+    .progress-fill {
+      width: 0;
       height: 100%;
       border-radius: inherit;
-      background: linear-gradient(90deg, var(--green-2), var(--green-3));
+      background: linear-gradient(90deg, var(--green-dark), var(--green));
       transition: width .3s ease;
     }
 
-    #questionText {
-      margin-bottom: 24px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(1.2rem, 3vw, 1.65rem);
-      line-height: 1.35;
+    .question {
+      font-size: clamp(1.05rem, 3vw, 1.35rem);
+      font-weight: 800;
+      margin-bottom: 21px;
     }
 
     .answers {
       display: grid;
-      gap: 11px;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
 
-    .answer-option {
-      width: 100%;
+    .answer {
+      min-height: 57px;
       padding: 15px 17px;
-      border: 1px solid rgba(255, 255, 255, .11);
+      text-align: left;
+      color: #d8e4db;
+      border: 1px solid rgba(255, 255, 255, .1);
       border-radius: 13px;
       background: rgba(255, 255, 255, .025);
-      color: var(--white);
-      text-align: left;
       cursor: pointer;
       transition: .2s ease;
     }
 
-    .answer-option:hover:not(:disabled) {
+    .answer:hover:not(:disabled) {
       border-color: rgba(115, 255, 167, .5);
-      background: rgba(115, 255, 167, .06);
+      background: rgba(115, 255, 167, .055);
     }
 
-    .answer-option.correct {
-      border-color: var(--green);
-      background: rgba(35, 217, 120, .13);
+    .answer.correct {
+      color: #c9ffda;
+      border-color: rgba(115, 255, 167, .65);
+      background: rgba(35, 217, 120, .12);
     }
 
-    .answer-option.wrong {
-      border-color: var(--red);
-      background: rgba(232, 75, 91, .10);
-    }
-
-    .answer-option:disabled {
-      cursor: default;
-      opacity: .9;
+    .answer.wrong {
+      color: #ffd2d6;
+      border-color: rgba(255, 120, 132, .6);
+      background: rgba(199, 67, 81, .12);
     }
 
     .quiz-bottom {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 15px;
-      margin-top: 24px;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 23px;
     }
 
     #quizFeedback {
       color: var(--muted);
-      font-size: .85rem;
+      font-size: .86rem;
     }
 
-    #nextQuestion {
-      border: 0;
-    }
-
-    #quizResult {
+    .quiz-result {
       text-align: center;
+      padding: 20px 0;
     }
 
-    #quizResult h3 {
-      margin: 10px 0;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 2rem;
-    }
-
-    #finalScore {
-      margin: 18px 0;
+    .quiz-result .result-number {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(3rem, 10vw, 5rem);
+      line-height: 1.2;
+      font-weight: 900;
       color: var(--green);
-      font-size: 3.4rem;
-      font-weight: 800;
     }
 
-    /* Tickets */
+    .quiz-result p {
+      margin: 12px 0 24px;
+      color: var(--muted);
+    }
 
-    .tickets-box {
-      position: relative;
-      overflow: hidden;
-      max-width: 820px;
-      margin: auto;
-      padding: 55px 30px;
-      border: 1px solid rgba(232, 75, 91, .24);
-      border-radius: 28px;
-      background:
-        radial-gradient(ellipse at 50% 0%, rgba(232, 75, 91, .09), transparent 60%),
-        linear-gradient(145deg, rgba(22, 23, 17, .95), rgba(8, 11, 8, .95));
+    /* ENTRADAS */
+    .tickets-card {
+      padding: clamp(28px, 6vw, 55px);
       text-align: center;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(35, 217, 120, .1), transparent 60%),
+        linear-gradient(145deg, rgba(17, 31, 21, .8), rgba(8, 13, 10, .9));
     }
 
     .ticket-symbol {
-      display: grid;
-      place-items: center;
       width: 64px;
       height: 64px;
-      margin: 0 auto 20px;
-      border: 1px solid rgba(232, 75, 91, .25);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 24px;
+      border: 1px solid rgba(217, 197, 139, .25);
       border-radius: 20px;
-      background: rgba(232, 75, 91, .08);
-      color: #ff8791;
+      color: var(--gold);
+      background: rgba(217, 197, 139, .06);
       font-size: 1.7rem;
     }
 
-    .ticket-status {
-      display: inline-block;
-      margin-bottom: 20px;
-      padding: 7px 13px;
-      border: 1px solid rgba(232, 75, 91, .26);
-      border-radius: 999px;
-      background: rgba(232, 75, 91, .08);
-      color: #ff9ba3;
-      font-size: .7rem;
+    .tickets-card h3 {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(1.8rem, 5vw, 2.7rem);
+      font-weight: 900;
+    }
+
+    .tickets-card p {
+      max-width: 580px;
+      margin: 15px auto 25px;
+      color: var(--muted);
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      border: 1px solid rgba(217, 197, 139, .2);
+      border-radius: 99px;
+      color: var(--gold);
+      background: rgba(217, 197, 139, .05);
+      font-size: .76rem;
       font-weight: 800;
-      letter-spacing: 1.7px;
     }
 
-    .tickets-box h2 {
-      font-size: clamp(1.8rem, 5vw, 3rem);
+    .status::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
     }
 
-    .tickets-box p {
-      max-width: 570px;
-      margin: 18px auto 25px;
-      color: var(--muted);
-    }
-
-    /* Final y footer */
-
-    .ending {
-      padding: 65px 0 90px;
-      text-align: center;
-    }
-
-    .ending svg {
-      width: 48px;
-      height: 48px;
-      color: var(--green);
-      margin-bottom: 18px;
-      filter: drop-shadow(0 0 15px rgba(115, 255, 167, .2));
-    }
-
-    .ending h2 {
-      font-size: clamp(2.1rem, 6vw, 4.4rem);
-    }
-
-    .ending p {
-      margin-top: 15px;
-      color: var(--muted);
-    }
-
-    .ending strong {
-      color: var(--green-3);
-    }
-
+    /* FOOTER */
     footer {
-      padding: 25px 20px;
-      border-top: 1px solid rgba(115, 255, 167, .1);
-      background: rgba(3, 5, 4, .8);
-      text-align: center;
+      padding: 35px 20px 30px;
+      border-top: 1px solid var(--border);
+      background: rgba(3, 6, 4, .7);
     }
 
-    footer p {
-      color: #87988c;
-      font-size: .8rem;
+    .footer-inner {
+      width: min(1100px, 100%);
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
     }
 
-    footer span {
+    .footer-brand {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 900;
+      letter-spacing: -.5px;
+    }
+
+    .footer-brand span {
       color: var(--green);
     }
 
     .footer-note {
-      margin-top: 6px;
-      color: #637368;
-      font-size: .72rem;
+      margin-top: 5px;
+      color: #718477;
+      font-size: .75rem;
     }
 
-    /* Animaciones de entrada */
+    .back-top {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      color: var(--green);
+      transition: .2s ease;
+    }
 
+    .back-top:hover {
+      background: rgba(115, 255, 167, .08);
+      transform: translateY(-3px);
+    }
+
+    /* ANIMACIONES DE ENTRADA */
     .reveal {
       opacity: 0;
       transform: translateY(22px);
-      transition: opacity .75s ease, transform .75s ease;
+      transition: opacity .7s ease, transform .7s ease;
     }
 
     .reveal.visible {
@@ -967,139 +999,16 @@
       transform: translateY(0);
     }
 
-    @media (max-width: 850px) {
-      .nav-inner {
-        min-height: 70px;
-      }
-
-      .nav-links {
-        gap: 13px;
-      }
-
-      .nav-links a:not(.nav-cta) {
-        display: none;
-      }
-
-      .cards-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .social-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .story-layout {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
-
-      .story-art {
-        min-height: 280px;
-      }
-
-      .profile-panel {
-        grid-template-columns: 1fr;
-      }
-
-      .profile-stamp {
-        min-height: 220px;
-      }
-    }
-
-    @media (max-width: 560px) {
-      section {
-        padding: 75px 0;
-      }
-
-      .container {
-        width: min(100% - 30px, 1080px);
-      }
-
-      .nav-inner {
-        width: calc(100% - 30px);
-        gap: 10px;
-      }
-
-      .brand {
-        font-size: .92rem;
-      }
-
-      .brand-clover {
-        width: 29px;
-        height: 29px;
-      }
-
-      .nav-cta {
-        padding: 9px 12px;
-        font-size: .76rem;
-      }
-
-      .hero {
-        min-height: 610px;
-        padding: 95px 0 75px;
-      }
-
-      .hero h1 {
-        font-size: clamp(3.3rem, 16vw, 5rem);
-        letter-spacing: -3px;
-      }
-
-      .hero-description {
-        font-size: .91rem;
-      }
-
-      .hero-buttons {
-        flex-direction: column;
-        align-items: stretch;
-        max-width: 280px;
-        margin-inline: auto;
-        margin-top: 28px;
-      }
-
-      .cards-grid,
-      .social-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .glass-card {
-        padding: 24px;
-      }
-
-      .profile-panel {
-        padding: 25px;
-      }
-
-      .quiz-shell {
-        padding: 22px 17px;
-      }
-
-      .quiz-bottom {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      #nextQuestion {
-        width: 100%;
-      }
-
-      .tickets-box {
-        padding: 42px 20px;
-      }
-
-      .christmas-lights span {
-        width: 7px;
-        height: 11px;
-      }
-    }
-
     @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
+      *, *::before, *::after {
         scroll-behavior: auto !important;
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: .01ms !important;
+      }
+
+      #christmasSnow {
+        display: none;
       }
 
       .reveal {
@@ -1107,359 +1016,461 @@
         transform: none;
       }
     }
+
+    /* MÓVILES */
+    @media (max-width: 800px) {
+      .nav-inner {
+        min-height: 68px;
+        width: calc(100% - 28px);
+      }
+
+      .nav-links {
+        gap: 14px;
+      }
+
+      .nav-links a {
+        font-size: .76rem;
+      }
+
+      .nav-links .nav-cta {
+        padding: 8px 11px;
+      }
+
+      .music-grid,
+      .story-grid,
+      .profile-card {
+        grid-template-columns: 1fr;
+      }
+
+      .story-art {
+        min-height: 280px;
+      }
+
+      .social-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .section {
+        padding: 78px 0;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .nav-inner {
+        flex-wrap: wrap;
+        padding: 12px 0;
+        gap: 10px;
+      }
+
+      .brand {
+        font-size: .9rem;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+        gap: 8px;
+        overflow-x: auto;
+        padding: 3px 0 6px;
+      }
+
+      .nav-links a {
+        white-space: nowrap;
+        font-size: .73rem;
+      }
+
+      .nav-links .nav-cta {
+        padding: 6px 10px;
+      }
+
+      .hero {
+        min-height: 590px;
+        padding: 95px 18px 80px;
+      }
+
+      .hero h1 {
+        font-size: clamp(3.5rem, 17vw, 5.7rem);
+      }
+
+      .section {
+        width: calc(100% - 30px);
+        padding: 65px 0;
+      }
+
+      .section-heading h2 {
+        letter-spacing: -1px;
+      }
+
+      .music-feature,
+      .story-copy,
+      .profile-card {
+        padding: 25px;
+      }
+
+      .social-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .answers {
+        grid-template-columns: 1fr;
+      }
+
+      .quiz-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+      }
+
+      .clover-art {
+        width: 115vw;
+        height: 115vw;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <!-- Luces navideñas -->
-  <div class="christmas-lights" aria-hidden="true">
-    <span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span>
-  </div>
-
-  <!-- Nieve animada -->
-  <canvas id="christmasSnow" aria-hidden="true"></canvas>
-
-  <!-- Trébol de fondo fijo -->
+  <!-- Trébol decorativo de cuatro pétalos con tallo central -->
   <div class="clover-background" aria-hidden="true">
-    <svg viewBox="0 0 200 200" fill="currentColor">
-      <path d="M100 92 C78 65 44 76 45 49 C46 20 83 18 100 48 C117 18 154 20 155 49 C156 76 122 65 100 92Z"/>
-      <path d="M100 92 C73 70 45 93 58 119 C69 142 93 122 100 105 C107 122 131 142 142 119 C155 93 127 70 100 92Z" transform="rotate(180 100 100)"/>
-      <path d="M96 103 C90 127 89 145 82 166 L99 166 L105 110Z"/>
+    <svg class="clover-art" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+      <g>
+        <path class="petal" d="M250 225 C210 202 157 173 166 119 C173 76 215 61 243 90 C259 107 261 133 250 157 C239 133 241 107 257 90 C285 61 327 76 334 119 C343 173 290 202 250 225 Z"/>
+        <path class="petal" d="M275 250 C298 210 327 157 381 166 C424 173 439 215 410 243 C393 259 367 261 343 250 C367 239 393 241 410 257 C439 285 424 327 381 334 C327 343 298 290 275 250 Z"/>
+        <path class="petal" d="M250 275 C290 298 343 327 334 381 C327 424 285 439 257 410 C241 393 239 367 250 343 C261 367 259 393 243 410 C215 439 173 424 166 381 C157 327 210 298 250 275 Z"/>
+        <path class="petal" d="M225 250 C202 290 173 343 119 334 C76 327 61 285 90 257 C107 241 133 239 157 250 C133 261 107 259 90 243 C61 215 76 173 119 166 C173 157 202 210 225 250 Z"/>
+        <path class="vein" d="M250 225 Q247 184 250 142"/>
+        <path class="vein" d="M275 250 Q316 247 358 250"/>
+        <path class="vein" d="M250 275 Q253 316 250 358"/>
+        <path class="vein" d="M225 250 Q184 253 142 250"/>
+        <path class="stem" d="M250 258 C252 319 242 375 270 435"/>
+      </g>
     </svg>
   </div>
 
-  <div class="ambient one"></div>
-  <div class="ambient two"></div>
+  <div class="christmas-lights" aria-hidden="true">
+    <span class="light"></span><span class="light"></span>
+    <span class="light"></span><span class="light"></span>
+    <span class="light"></span><span class="light"></span>
+    <span class="light"></span><span class="light"></span>
+    <span class="light"></span><span class="light"></span>
+    <span class="light"></span><span class="light"></span>
+    <span class="light"></span><span class="light"></span>
+    <span class="light"></span><span class="light"></span>
+    <span class="light"></span><span class="light"></span>
+    <span class="light"></span><span class="light"></span>
+    <span class="light"></span><span class="light"></span>
+    <span class="light"></span><span class="light"></span>
+    <span class="light"></span><span class="light"></span>
+    <span class="light"></span><span class="light"></span>
+    <span class="light"></span><span class="light"></span>
+  </div>
 
-  <div class="site-content">
+  <canvas id="christmasSnow" aria-hidden="true"></canvas>
 
-    <!-- Navegación -->
-    <header class="topbar">
-      <nav class="nav-inner">
-        <a href="#inicio" class="brand" aria-label="Leviz PG, inicio">
-          <svg class="brand-clover" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">
-            <path d="M50 45 C35 25 10 35 17 16 C24 0 43 8 50 27 C57 8 76 0 83 16 C90 35 65 25 50 45Z"/>
-            <path d="M50 43 C30 31 13 47 24 64 C34 78 47 61 50 54 C53 61 66 78 76 64 C87 47 70 31 50 43Z" transform="rotate(180 50 50)"/>
-            <path d="M47 52 L42 91 L53 91 L54 53Z"/>
+  <header class="topbar">
+    <nav class="nav-inner" aria-label="Navegación principal">
+      <a href="#inicio" class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 100 100" fill="currentColor">
+            <path d="M50 43C35 34 19 27 22 13C25 2 39 2 46 12C49 17 49 24 50 29C51 24 51 17 54 12C61 2 75 2 78 13C81 27 65 34 50 43Z"/>
+            <path d="M57 50C66 35 73 19 87 22C98 25 98 39 88 46C83 49 76 49 71 50C76 51 83 51 88 54C98 61 98 75 87 78C73 81 66 65 57 50Z"/>
+            <path d="M50 57C65 66 81 73 78 87C75 98 61 98 54 88C51 83 51 76 50 71C49 76 49 83 46 88C39 98 25 98 22 87C19 73 35 66 50 57Z"/>
+            <path d="M43 50C34 65 27 81 13 78C2 75 2 61 12 54C17 51 24 51 29 50C24 49 17 49 12 46C2 39 2 25 13 22C27 19 34 35 43 50Z"/>
+            <path d="M50 51C49 68 52 82 62 96" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
           </svg>
-          <div>LEVIZ<span>PG</span></div>
-        </a>
+        </span>
+        LEVIZ<span>PG</span>
+      </a>
 
-        <div class="nav-links">
-          <a href="#musica">Música</a>
-          <a href="#historia">Historia</a>
-          <a href="#redes">Redes</a>
-          <a href="#quiz">Quiz</a>
-          <a href="#tickets" class="nav-cta">Tickets</a>
+      <div class="nav-links">
+        <a href="#musica">Música</a>
+        <a href="#historia">Historia</a>
+        <a href="#redes">Redes</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#tickets" class="nav-cta">Tickets ↗</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-content">
+        <div class="season-label">Una temporada diferente</div>
+        <h1>leviz<span>pg</span></h1>
+        <p class="hero-subtitle">
+          Música, raíces y una historia propia.<br>
+          <strong>El que le da la suerte al trébol.</strong>
+        </p>
+
+        <div class="hero-buttons">
+          <a class="button button-primary" href="https://open.spotify.com/artist/2PIQTmPNz7CF5rsNk4gKiy?si=9y3L6dSLSp-4qJj7H3vxnw&utm_source=whatsapp" target="_blank" rel="noopener noreferrer">
+            Escuchar música <span aria-hidden="true">↗</span>
+          </a>
+          <a class="button button-secondary" href="#historia">Conocer su historia ↓</a>
         </div>
-      </nav>
-    </header>
 
-    <main>
-      <!-- Hero -->
-      <section class="hero" id="inicio">
-        <div class="container hero-inner reveal">
-          <div class="christmas-label">✦ Christmas Edition ✦</div>
+        <p class="hero-note">Independiente por esencia <span>✦</span> auténtico por naturaleza</p>
+      </div>
+    </section>
 
-          <h1>leviz<span>pg</span></h1>
-
-          <p class="hero-subtitle">El que le da la suerte al trébol.</p>
-
-          <p class="hero-description">
-            Una historia propia, un sonido propio y un sueño que sigue creciendo.
-            Bienvenido al universo de Leviz PG.
-          </p>
-
-          <div class="hero-buttons">
-            <a class="button button-primary" href="#musica">♬ Escuchar música</a>
-            <a class="button button-secondary" href="#historia">Conocer su historia ↗</a>
-          </div>
-
-          <svg class="hero-clover" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">
-            <path d="M50 45 C35 25 10 35 17 16 C24 0 43 8 50 27 C57 8 76 0 83 16 C90 35 65 25 50 45Z"/>
-            <path d="M50 43 C30 31 13 47 24 64 C34 78 47 61 50 54 C53 61 66 78 76 64 C87 47 70 31 50 43Z" transform="rotate(180 50 50)"/>
-            <path d="M47 52 L42 91 L53 91 L54 53Z"/>
-          </svg>
-
-          <p class="scroll-note">Desliza para descubrir ↓</p>
+    <div class="marquee" aria-label="Lema del artista">
+      <div class="marquee-track">
+        <div class="marquee-group">
+          <span>LEVIZ PG</span> · EL QUE LE DA LA SUERTE AL TRÉBOL ·
+          <i>✦</i> MÚSICA INDEPENDIENTE · DESDE CUBA ·
+          <span>LEVIZ PG</span> · EL QUE LE DA LA SUERTE AL TRÉBOL ·
+          <i>✦</i> MÚSICA INDEPENDIENTE · DESDE CUBA ·
         </div>
-      </section>
-
-      <!-- Franja -->
-      <div class="marquee" aria-hidden="true">
-        <div class="marquee-track">
-          <span>LEVIZ PG ✦</span><span>EL QUE LE DA LA SUERTE AL TRÉBOL ✦</span>
-          <span>MÚSICA INDEPENDIENTE ✦</span><span>DESDE CUBA PARA EL MUNDO ✦</span>
-          <span>LEVIZ PG ✦</span><span>EL QUE LE DA LA SUERTE AL TRÉBOL ✦</span>
-          <span>MÚSICA INDEPENDIENTE ✦</span><span>DESDE CUBA PARA EL MUNDO ✦</span>
+        <div class="marquee-group" aria-hidden="true">
+          <span>LEVIZ PG</span> · EL QUE LE DA LA SUERTE AL TRÉBOL ·
+          <i>✦</i> MÚSICA INDEPENDIENTE · DESDE CUBA ·
+          <span>LEVIZ PG</span> · EL QUE LE DA LA SUERTE AL TRÉBOL ·
+          <i>✦</i> MÚSICA INDEPENDIENTE · DESDE CUBA ·
         </div>
       </div>
+    </div>
 
-      <!-- Música -->
-      <section id="musica">
-        <div class="container">
-          <div class="section-heading reveal">
-            <span class="eyebrow">Su sonido</span>
-            <h2>La música habla <span>por sí sola.</span></h2>
-            <p class="section-description">
-              Explora sus plataformas oficiales y descubre los temas de Leviz PG.
-              Cada reproducción forma parte del camino.
-            </p>
+    <section class="section reveal" id="musica">
+      <div class="section-heading">
+        <span class="eyebrow">01 / Su sonido</span>
+        <h2>La música habla <span>por él.</span></h2>
+        <p>Descubre sus lanzamientos y sigue su camino en las plataformas oficiales.</p>
+      </div>
+
+      <div class="music-grid">
+        <article class="panel music-feature">
+          <div>
+            <div class="music-symbol" aria-hidden="true">♫</div>
+            <h3>Entra en el<br>universo Leviz.</h3>
+            <p>Una identidad propia, una historia real y música hecha desde sus raíces.</p>
           </div>
+          <a class="button button-primary" href="https://open.spotify.com/artist/2PIQTmPNz7CF5rsNk4gKiy?si=9y3L6dSLSp-4qJj7H3vxnw&utm_source=whatsapp" target="_blank" rel="noopener noreferrer">
+            Abrir Spotify ↗
+          </a>
+        </article>
 
-          <div class="cards-grid">
-            <article class="glass-card reveal">
-              <div class="card-icon">♫</div>
-              <h3>Spotify</h3>
-              <p>Encuentra su música y escucha sus lanzamientos en Spotify.</p>
-              <a class="card-link" target="_blank" rel="noopener noreferrer"
-                 href="https://open.spotify.com/artist/2PIQTmPNz7CF5rsNk4gKiy?si=9y3L6dSLSp-4qJj7H3vxnw&utm_source=whatsapp">
-                Abrir Spotify ↗
-              </a>
-            </article>
-
-            <article class="glass-card reveal">
-              <div class="card-icon">▶</div>
-              <h3>YouTube</h3>
-              <p>Videos, contenido musical y novedades del artista.</p>
-              <a class="card-link" target="_blank" rel="noopener noreferrer"
-                 href="https://youtube.com/@leviz_pg?si=oxVT2Fh2MFXYjkMm">
-                Visitar canal ↗
-              </a>
-            </article>
-
-            <article class="glass-card reveal">
-              <div class="card-icon">♪</div>
-              <h3>Apple Music</h3>
-              <p>También puedes encontrar su catálogo en Apple Music.</p>
-              <a class="card-link" target="_blank" rel="noopener noreferrer"
-                 href="https://music.apple.com/us/artist/elviscocho/1812816695">
-                Escuchar ahora ↗
-              </a>
-            </article>
-          </div>
+        <div class="music-links">
+          <a class="music-link" href="https://youtube.com/@leviz_pg?si=oxVT2Fh2MFXYjkMm" target="_blank" rel="noopener noreferrer">
+            <span><strong>YouTube</strong><small>Videos y lanzamientos</small></span>
+            <span class="arrow">↗</span>
+          </a>
+          <a class="music-link" href="https://music.apple.com/us/artist/elviscocho/1812816695" target="_blank" rel="noopener noreferrer">
+            <span><strong>Apple Music</strong><small>Escucha sus temas</small></span>
+            <span class="arrow">↗</span>
+          </a>
+          <a class="music-link" href="https://www.tiktok.com/@leviz_elcl8ver?lang=es-419" target="_blank" rel="noopener noreferrer">
+            <span><strong>TikTok</strong><small>Contenido y novedades</small></span>
+            <span class="arrow">↗</span>
+          </a>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Historia -->
-      <section id="historia">
-        <div class="container story-layout">
-          <div class="story-art reveal" aria-label="Ilustración del trébol de Leviz PG">
-            <svg viewBox="0 0 200 200" fill="currentColor" aria-hidden="true">
-              <path d="M100 92 C78 65 44 76 45 49 C46 20 83 18 100 48 C117 18 154 20 155 49 C156 76 122 65 100 92Z"/>
-              <path d="M100 92 C73 70 45 93 58 119 C69 142 93 122 100 105 C107 122 131 142 142 119 C155 93 127 70 100 92Z" transform="rotate(180 100 100)"/>
-              <path d="M96 103 C90 127 89 145 82 166 L99 166 L105 110Z"/>
-            </svg>
-            <div class="story-art-label">SUERTE · TRABAJO · SUEÑOS</div>
-          </div>
+    <section class="section reveal" id="historia">
+      <div class="section-heading">
+        <span class="eyebrow">02 / De dónde viene</span>
+        <h2>Detrás del nombre, <span>una historia.</span></h2>
+      </div>
 
-          <div class="story-copy reveal">
-            <span class="eyebrow">Detrás del artista</span>
-            <h2>Todo comienza con <span>un sueño.</span></h2>
-
-            <p>
-              <strong>Leviz</strong> es un artista urbano independiente de Cuba,
-              alguien que decidió construir su propio camino a través de la música.
-            </p>
-
-            <p>
-              Desde los 14 años soñaba con dedicarse a la música. Antes de imaginarse
-              frente a un micrófono, la batería ya formaba parte de ese sueño.
-              Con el tiempo, esa pasión fue encontrando una nueva forma de expresarse.
-            </p>
-
-            <p>
-              Su visión musical recibe inspiración de artistas como
-              <strong>Milo J, Eladio Carrión, Bad Bunny y Luar La L</strong>,
-              mientras continúa buscando su propia identidad y sonido.
-            </p>
-
-            <div class="quote">
-              “EL QUE LE DA LA SUERTE AL TRÉBOL”.
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Redes -->
-      <section id="redes">
-        <div class="container">
-          <div class="section-heading reveal">
-            <span class="eyebrow">Conecta con Leviz</span>
-            <h2>Sigue el <span>movimiento.</span></h2>
-            <p class="section-description">
-              Mantente al día con su música, sus publicaciones y los próximos anuncios.
-            </p>
-          </div>
-
-          <div class="social-grid">
-            <a class="social-card reveal" target="_blank" rel="noopener noreferrer"
-               href="https://open.spotify.com/artist/2PIQTmPNz7CF5rsNk4gKiy?si=9y3L6dSLSp-4qJj7H3vxnw&utm_source=whatsapp">
-              <div class="social-icon">♫</div>
-              <div><h3>Spotify</h3><p>Escucha su música</p></div>
-            </a>
-
-            <a class="social-card reveal" target="_blank" rel="noopener noreferrer"
-               href="https://youtube.com/@leviz_pg?si=oxVT2Fh2MFXYjkMm">
-              <div class="social-icon">▶</div>
-              <div><h3>YouTube</h3><p>Videos y lanzamientos</p></div>
-            </a>
-
-            <a class="social-card reveal" target="_blank" rel="noopener noreferrer"
-               href="https://www.tiktok.com/@leviz_elcl8ver?lang=es-419">
-              <div class="social-icon">♪</div>
-              <div><h3>TikTok</h3><p>Clips y novedades</p></div>
-            </a>
-
-            <a class="social-card reveal" target="_blank" rel="noopener noreferrer"
-               href="https://www.instagram.com/leviz_pg/">
-              <div class="social-icon">◎</div>
-              <div><h3>Instagram</h3><p>Su día a día</p></div>
-            </a>
-
-            <a class="social-card reveal" target="_blank" rel="noopener noreferrer"
-               href="https://music.apple.com/us/artist/elviscocho/1812816695">
-              <div class="social-icon">♫</div>
-              <div><h3>Apple Music</h3><p>Escucha sus temas</p></div>
-            </a>
-
-            <a class="social-card reveal" target="_blank" rel="noopener noreferrer"
-               href="https://t.me/Elviscocho_beat">
-              <div class="social-icon">➤</div>
-              <div><h3>Telegram</h3><p>Únete a la comunidad</p></div>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- Perfil -->
-      <section id="artista">
-        <div class="container">
-          <div class="profile-panel reveal">
-            <div>
-              <span class="eyebrow">Identidad independiente</span>
-              <h2>No se trata de suerte.<br>Se trata de <span>creer.</span></h2>
-              <p>
-                Cada artista tiene una historia. La de Leviz PG se construye
-                con dedicación, influencias, experiencias y ganas de llegar más lejos.
-              </p>
-              <p>
-                Este es su espacio: una puerta a su música, su historia y todo lo que
-                está por venir.
-              </p>
-              <a class="button button-primary" href="#redes">Conectar con Leviz ↗</a>
-            </div>
-
-            <div class="profile-stamp">
-              <svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">
-                <path d="M50 45 C35 25 10 35 17 16 C24 0 43 8 50 27 C57 8 76 0 83 16 C90 35 65 25 50 45Z"/>
-                <path d="M50 43 C30 31 13 47 24 64 C34 78 47 61 50 54 C53 61 66 78 76 64 C87 47 70 31 50 43Z" transform="rotate(180 50 50)"/>
-                <path d="M47 52 L42 91 L53 91 L54 53Z"/>
-              </svg>
-              <strong>LEVIZ PG</strong>
-              <small>ELCL8VER · INDEPENDIENTE</small>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Quiz -->
-      <section id="quiz">
-        <div class="container">
-          <div class="section-heading reveal">
-            <span class="eyebrow">Pon a prueba tu memoria</span>
-            <h2>¿Cuánto conoces <span>a Leviz?</span></h2>
-            <p class="section-description">
-              Diez preguntas sobre su historia, sus influencias y su universo.
-              ¿Cuántas podrás acertar?
-            </p>
-          </div>
-
-          <div class="quiz-shell reveal">
-            <div id="quizGame">
-              <div class="quiz-top">
-                <span id="questionCounter">Pregunta 1 de 10</span>
-                <span id="scoreCounter">Aciertos: 0</span>
-              </div>
-
-              <div class="quiz-progress">
-                <div class="quiz-progress-bar" id="quizProgressBar"></div>
-              </div>
-
-              <h3 id="questionText">Preparando pregunta...</h3>
-              <div class="answers" id="answerOptions"></div>
-
-              <div class="quiz-bottom">
-                <p id="quizFeedback" aria-live="polite">Selecciona tu respuesta.</p>
-                <button class="button button-primary" id="nextQuestion" type="button" hidden>
-                  Siguiente →
-                </button>
-              </div>
-            </div>
-
-            <div id="quizResult" hidden>
-              <div class="eyebrow">Quiz completado</div>
-              <h3 id="resultTitle">¡Buen trabajo!</h3>
-              <p id="resultMessage">Gracias por participar.</p>
-              <div id="finalScore">0/10</div>
-              <button class="button button-primary" id="restartQuiz" type="button">
-                Volver a jugar ↻
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Tickets -->
-      <section id="tickets">
-        <div class="container">
-          <div class="tickets-box reveal">
-            <div class="ticket-symbol">✦</div>
-            <div class="ticket-status">VENTA DE TICKETS NO HABILITADA</div>
-            <h2>¿Nos vemos en el <span>próximo show?</span></h2>
-            <p>
-              Por ahora, la venta de tickets no está disponible. La información
-              sobre futuros eventos se publicará cuando el artista haga un anuncio
-              oficial en sus redes sociales.
-            </p>
-            <a class="button button-secondary" href="#redes">Seguir sus redes ↗</a>
-          </div>
-        </div>
-      </section>
-
-      <!-- Cierre -->
-      <section class="ending">
-        <div class="container reveal">
-          <svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">
-            <path d="M50 45 C35 25 10 35 17 16 C24 0 43 8 50 27 C57 8 76 0 83 16 C90 35 65 25 50 45Z"/>
-            <path d="M50 43 C30 31 13 47 24 64 C34 78 47 61 50 54 C53 61 66 78 76 64 C87 47 70 31 50 43Z" transform="rotate(180 50 50)"/>
-            <path d="M47 52 L42 91 L53 91 L54 53Z"/>
+      <div class="story-grid">
+        <div class="panel story-art" aria-label="Trébol decorativo">
+          <svg viewBox="0 0 500 500" role="img" aria-label="Trébol de cuatro pétalos">
+            <defs>
+              <linearGradient id="petalGradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#c4f8d4"/>
+                <stop offset="52%" stop-color="#73ffa7"/>
+                <stop offset="100%" stop-color="#23d978"/>
+              </linearGradient>
+            </defs>
+            <g fill="url(#petalGradient)" stroke="#c4f8d4" stroke-opacity=".25" stroke-width="2">
+              <path d="M250 242C207 213 158 182 167 126C173 86 214 70 241 99C255 114 255 137 250 160C245 137 245 114 259 99C286 70 327 86 333 126C342 182 293 213 250 242Z"/>
+              <path d="M258 250C287 207 318 158 374 167C414 173 430 214 401 241C386 255 363 255 340 250C363 245 386 245 401 259C430 286 414 327 374 333C318 342 287 293 258 250Z"/>
+              <path d="M250 258C293 287 342 318 333 374C327 414 286 430 259 401C245 386 245 363 250 340C255 363 255 386 241 401C214 430 173 414 167 374C158 318 207 287 250 258Z"/>
+              <path d="M242 250C213 293 182 342 126 333C86 327 70 286 99 259C114 245 137 245 160 250C137 255 114 255 99 241C70 214 86 173 126 167C182 158 213 207 242 250Z"/>
+            </g>
+            <path d="M250 250C249 320 246 377 278 438" fill="none" stroke="#73ffa7" stroke-width="18" stroke-linecap="round"/>
+            <g fill="none" stroke="#f5fff8" stroke-opacity=".45" stroke-width="2" stroke-linecap="round">
+              <path d="M250 226L250 143"/>
+              <path d="M274 250L357 250"/>
+              <path d="M250 274L250 357"/>
+              <path d="M226 250L143 250"/>
+            </g>
           </svg>
-          <h2>La suerte la creas <span>tú.</span></h2>
-          <p>Gracias por formar parte del camino de <strong>Leviz PG</strong>.</p>
         </div>
-      </section>
-    </main>
 
-    <footer>
-      <p>© <span id="currentYear"></span> <span>Leviz PG</span>. Todos los derechos reservados.</p>
-      <p class="footer-note">Hecho con música, sueños y un trébol. ✦ Christmas Edition</p>
-    </footer>
-  </div>
+        <article class="panel story-copy">
+          <h3>De Cuba para el mundo.</h3>
+          <p>
+            Leviz es un artista urbano independiente de Cuba que construye su propio camino
+            a través de la música. Su historia no comienza frente a un micrófono, sino
+            con un sueño que lleva consigo desde los <strong>14 años</strong>.
+          </p>
+          <p>
+            Antes de perseguir su camino como artista, la batería ya formaba parte de su
+            historia. Hoy, sus influencias incluyen a Milo J, Eladio Carrión, Bad Bunny
+            y Luar la L, mientras continúa desarrollando su propio sonido e identidad.
+          </p>
+          <p>
+            El trébol representa mucho más que suerte: representa una mentalidad, una
+            identidad y la decisión de crear oportunidades por cuenta propia.
+          </p>
+          <div class="quote">“EL QUE LE DA LA SUERTE AL TRÉBOL.”</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal" id="perfil">
+      <div class="section-heading">
+        <span class="eyebrow">03 / La esencia</span>
+        <h2>No se trata de suerte.<br><span>Se trata de creer.</span></h2>
+      </div>
+
+      <div class="panel profile-card">
+        <div>
+          <h3>Leviz PG</h3>
+          <p>
+            Artista urbano independiente que convierte sus experiencias, aspiraciones
+            e influencias en una identidad musical propia. Su camino continúa creciendo
+            lanzamiento tras lanzamiento.
+          </p>
+        </div>
+        <div class="profile-stats">
+          <div class="stat"><strong>Cuba</strong><span>Sus raíces</span></div>
+          <div class="stat"><strong>14 años</strong><span>El inicio del sueño</span></div>
+          <div class="stat"><strong>Independiente</strong><span>Su camino</span></div>
+          <div class="stat"><strong>El trébol</strong><span>Su identidad</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="redes">
+      <div class="section-heading">
+        <span class="eyebrow">04 / Mantente cerca</span>
+        <h2>El próximo capítulo <span>también se vive aquí.</span></h2>
+        <p>Sigue los perfiles oficiales para no perderte nuevas canciones, videos y anuncios.</p>
+      </div>
+
+      <div class="social-grid">
+        <a class="social-card" href="https://open.spotify.com/artist/2PIQTmPNz7CF5rsNk4gKiy?si=9y3L6dSLSp-4qJj7H3vxnw&utm_source=whatsapp" target="_blank" rel="noopener noreferrer">
+          <span class="social-icon">S</span>
+          <span><strong>Spotify</strong><small>Escuchar música ↗</small></span>
+        </a>
+        <a class="social-card" href="https://youtube.com/@leviz_pg?si=oxVT2Fh2MFXYjkMm" target="_blank" rel="noopener noreferrer">
+          <span class="social-icon">▶</span>
+          <span><strong>YouTube</strong><small>Videos oficiales ↗</small></span>
+        </a>
+        <a class="social-card" href="https://www.tiktok.com/@leviz_elcl8ver?lang=es-419" target="_blank" rel="noopener noreferrer">
+          <span class="social-icon">T</span>
+          <span><strong>TikTok</strong><small>Contenido nuevo ↗</small></span>
+        </a>
+        <a class="social-card" href="https://www.instagram.com/leviz_pg/" target="_blank" rel="noopener noreferrer">
+          <span class="social-icon">IG</span>
+          <span><strong>Instagram</strong><small>Detrás de escena ↗</small></span>
+        </a>
+        <a class="social-card" href="https://music.apple.com/us/artist/elviscocho/1812816695" target="_blank" rel="noopener noreferrer">
+          <span class="social-icon">♫</span>
+          <span><strong>Apple Music</strong><small>Su catálogo ↗</small></span>
+        </a>
+        <a class="social-card" href="https://t.me/Elviscocho_beat" target="_blank" rel="noopener noreferrer">
+          <span class="social-icon">➤</span>
+          <span><strong>Telegram</strong><small>Canal oficial ↗</small></span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section reveal" id="quiz">
+      <div class="section-heading">
+        <span class="eyebrow">05 / Pon a prueba tu memoria</span>
+        <h2>¿Cuánto conoces <span>a Leviz?</span></h2>
+        <p>Diez preguntas sobre su historia, sus raíces y lo que representa el trébol.</p>
+      </div>
+
+      <div class="panel quiz-panel">
+        <div id="quizGame">
+          <div class="quiz-top">
+            <h3>El reto del trébol</h3>
+            <span class="quiz-count" id="quizCount">Pregunta 1 de 10</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+          <div class="question" id="quizQuestion">¿De qué país es Leviz?</div>
+          <div class="answers" id="quizAnswers"></div>
+          <div class="quiz-bottom">
+            <span id="quizFeedback" aria-live="polite">Elige una respuesta para continuar.</span>
+            <button class="button button-primary" id="nextQuestion" type="button" disabled>Siguiente →</button>
+          </div>
+        </div>
+
+        <div class="quiz-result" id="quizResult" hidden>
+          <span class="eyebrow">Reto completado</span>
+          <div class="result-number" id="resultNumber">0/10</div>
+          <h3 id="resultTitle">Tu resultado</h3>
+          <p id="resultText"></p>
+          <button class="button button-primary" id="restartQuiz" type="button">Volver a jugar ↻</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="tickets">
+      <div class="section-heading">
+        <span class="eyebrow">06 / En vivo</span>
+        <h2>¿Nos vemos <span>en el escenario?</span></h2>
+      </div>
+
+      <div class="panel tickets-card">
+        <div class="ticket-symbol" aria-hidden="true">✦</div>
+        <h3>Los tickets llegarán a su tiempo.</h3>
+        <p>
+          Por el momento no hay entradas disponibles. Cuando Leviz anuncie nuevas
+          presentaciones, los detalles se publicarán a través de sus redes sociales oficiales.
+          Mantente atento a los próximos anuncios.
+        </p>
+        <span class="status">Próximamente · Pendiente de anuncio oficial</span>
+        <div style="margin-top:25px">
+          <a class="button button-secondary" href="https://www.instagram.com/leviz_pg/" target="_blank" rel="noopener noreferrer">
+            Seguir anuncios ↗
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">LEVIZ<span>PG</span></div>
+        <p class="footer-note">El que le da la suerte al trébol. © <span id="currentYear"></span></p>
+      </div>
+      <a href="#inicio" class="back-top" aria-label="Volver al inicio">↑</a>
+    </div>
+  </footer>
 
   <script>
     // Año automático
     document.getElementById("currentYear").textContent = new Date().getFullYear();
 
-    // Nieve navideña ligera
+    // Aparición suave de las secciones
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach((section) => {
+      revealObserver.observe(section);
+    });
+
+    // Nieve ligera: adaptada al tamaño de pantalla y a las preferencias de movimiento
     (() => {
       const canvas = document.getElementById("christmasSnow");
       const ctx = canvas.getContext("2d");
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduceMotion || !ctx) return;
 
       let width = 0;
       let height = 0;
@@ -1470,20 +1481,20 @@
         const ratio = Math.min(window.devicePixelRatio || 1, 2);
         width = window.innerWidth;
         height = window.innerHeight;
-        canvas.width = width * ratio;
-        canvas.height = height * ratio;
+        canvas.width = Math.floor(width * ratio);
+        canvas.height = Math.floor(height * ratio);
         canvas.style.width = width + "px";
         canvas.style.height = height + "px";
         ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
 
-        const count = Math.min(100, Math.floor(width / 12));
-        flakes = Array.from({ length: count }, () => ({
+        const amount = Math.min(95, Math.max(24, Math.floor(width / 15)));
+        flakes = Array.from({ length: amount }, () => ({
           x: Math.random() * width,
           y: Math.random() * height,
-          r: Math.random() * 2.2 + .5,
-          speed: Math.random() * .65 + .2,
-          drift: Math.random() * .5 - .25,
-          opacity: Math.random() * .55 + .2
+          r: Math.random() * 1.8 + .5,
+          speed: Math.random() * .65 + .25,
+          drift: (Math.random() - .5) * .35,
+          alpha: Math.random() * .48 + .2
         }));
       }
 
@@ -1493,7 +1504,7 @@
         for (const flake of flakes) {
           ctx.beginPath();
           ctx.arc(flake.x, flake.y, flake.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(240, 255, 245, ${flake.opacity})`;
+          ctx.fillStyle = `rgba(235, 255, 240, ${flake.alpha})`;
           ctx.fill();
 
           flake.y += flake.speed;
@@ -1503,236 +1514,191 @@
             flake.y = -5;
             flake.x = Math.random() * width;
           }
-
-          if (flake.x > width + 5) flake.x = -5;
           if (flake.x < -5) flake.x = width + 5;
+          if (flake.x > width + 5) flake.x = -5;
         }
 
         animationId = requestAnimationFrame(draw);
       }
 
-      function startSnow() {
+      resize();
+      draw();
+
+      window.addEventListener("resize", () => {
         cancelAnimationFrame(animationId);
-
-        if (reduceMotion.matches) {
-          ctx.clearRect(0, 0, width, height);
-          return;
-        }
-
         resize();
         draw();
-      }
+      }, { passive: true });
 
-      window.addEventListener("resize", resize);
-      reduceMotion.addEventListener?.("change", startSnow);
-      startSnow();
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          cancelAnimationFrame(animationId);
+        } else {
+          cancelAnimationFrame(animationId);
+          draw();
+        }
+      });
     })();
 
-    // Animaciones de aparición al desplazarse
-    (() => {
-      const elements = document.querySelectorAll(".reveal");
+    // Quiz de diez preguntas
+    const quizQuestions = [
+      {
+        q: "¿De qué país es Leviz?",
+        a: ["Cuba", "Puerto Rico", "República Dominicana", "Colombia"],
+        correct: 0
+      },
+      {
+        q: "¿Qué tipo de artista es Leviz?",
+        a: ["DJ de música electrónica", "Artista urbano independiente", "Cantante de ópera", "Productor de cine"],
+        correct: 1
+      },
+      {
+        q: "¿A qué edad comenzó a soñar con su camino musical?",
+        a: ["A los 8 años", "A los 12 años", "A los 14 años", "A los 18 años"],
+        correct: 2
+      },
+      {
+        q: "¿Qué instrumento formaba parte de su historia antes de centrarse en su camino artístico?",
+        a: ["Violín", "Batería", "Saxofón", "Piano clásico"],
+        correct: 1
+      },
+      {
+        q: "¿Cuál de estos artistas está entre sus influencias?",
+        a: ["Milo J", "Ed Sheeran", "Adele", "Sting"],
+        correct: 0
+      },
+      {
+        q: "¿Cuál de estos grupos contiene únicamente influencias mencionadas en su historia?",
+        a: ["Milo J, Eladio Carrión y Bad Bunny", "Drake, Adele y Sting", "Shakira, Coldplay y Ed Sheeran", "Adele, Rihanna y Sia"],
+        correct: 0
+      },
+      {
+        q: "¿Qué representa el trébol en su identidad?",
+        a: ["Solo una decoración", "Una marca de ropa", "Una mentalidad y una identidad", "El nombre de un álbum confirmado"],
+        correct: 2
+      },
+      {
+        q: "¿Cómo se define su camino musical?",
+        a: ["Como artista independiente", "Como miembro de una orquesta clásica", "Como cantante retirado", "Como presentador de televisión"],
+        correct: 0
+      },
+      {
+        q: "¿Cuál es el lema asociado a Leviz?",
+        a: ["El mundo es pequeño", "El que le da la suerte al trébol", "La música nunca termina", "Nacido para correr"],
+        correct: 1
+      },
+      {
+        q: "¿Dónde se anunciarán las novedades sobre futuras presentaciones?",
+        a: ["En anuncios sin verificar", "En redes sociales oficiales", "En una página de entradas inventada", "No se publicarán anuncios"],
+        correct: 1
+      }
+    ];
 
-      if ("IntersectionObserver" in window) {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.12 });
+    const quizGame = document.getElementById("quizGame");
+    const quizResult = document.getElementById("quizResult");
+    const quizQuestion = document.getElementById("quizQuestion");
+    const quizAnswers = document.getElementById("quizAnswers");
+    const quizCount = document.getElementById("quizCount");
+    const progressFill = document.getElementById("progressFill");
+    const quizFeedback = document.getElementById("quizFeedback");
+    const nextButton = document.getElementById("nextQuestion");
 
-        elements.forEach(element => observer.observe(element));
+    let questionIndex = 0;
+    let score = 0;
+    let answered = false;
+
+    function renderQuestion() {
+      const item = quizQuestions[questionIndex];
+      answered = false;
+
+      quizCount.textContent = `Pregunta ${questionIndex + 1} de ${quizQuestions.length}`;
+      progressFill.style.width = `${(questionIndex / quizQuestions.length) * 100}%`;
+      quizQuestion.textContent = item.q;
+      quizAnswers.innerHTML = "";
+      quizFeedback.textContent = "Elige una respuesta para continuar.";
+      nextButton.disabled = true;
+      nextButton.textContent = questionIndex === quizQuestions.length - 1 ? "Ver resultado →" : "Siguiente →";
+
+      item.a.forEach((answer, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "answer";
+        button.textContent = answer;
+        button.addEventListener("click", () => chooseAnswer(index));
+        quizAnswers.appendChild(button);
+      });
+    }
+
+    function chooseAnswer(selectedIndex) {
+      if (answered) return;
+      answered = true;
+
+      const item = quizQuestions[questionIndex];
+      const buttons = [...quizAnswers.querySelectorAll(".answer")];
+      buttons.forEach((button) => { button.disabled = true; });
+
+      if (selectedIndex === item.correct) {
+        score++;
+        buttons[selectedIndex].classList.add("correct");
+        quizFeedback.textContent = "¡Correcto! Conoces bien la historia. ✦";
       } else {
-        elements.forEach(element => element.classList.add("visible"));
-      }
-    })();
-
-    // Quiz de 10 preguntas
-    (() => {
-      const questions = [
-        {
-          question: "¿De dónde es Leviz, según su historia?",
-          answers: ["Puerto Rico", "Cuba", "República Dominicana", "Colombia"],
-          correct: 1
-        },
-        {
-          question: "¿Cómo se describe musicalmente Leviz?",
-          answers: ["Artista urbano independiente", "DJ de música clásica", "Productor de cine", "Cantante de ópera"],
-          correct: 0
-        },
-        {
-          question: "¿A qué edad comenzó a soñar con dedicarse a la música?",
-          answers: ["A los 8 años", "A los 12 años", "A los 14 años", "A los 18 años"],
-          correct: 2
-        },
-        {
-          question: "¿Qué instrumento formaba parte de su sueño inicial?",
-          answers: ["Violín", "Batería", "Saxofón", "Piano"],
-          correct: 1
-        },
-        {
-          question: "¿Cuál es el lema de Leviz PG?",
-          answers: [
-            "El ritmo nunca para",
-            "La música lo puede todo",
-            "El que le da la suerte al trébol",
-            "Nacido para ganar"
-          ],
-          correct: 2
-        },
-        {
-          question: "¿Cuál de estos artistas aparece entre sus inspiraciones?",
-          answers: ["Milo J", "Adele", "Ed Sheeran", "Bruno Mars"],
-          correct: 0
-        },
-        {
-          question: "¿Cuál de estos artistas también lo inspira?",
-          answers: ["Eladio Carrión", "The Weeknd", "Shakira", "Drake Bell"],
-          correct: 0
-        },
-        {
-          question: "¿En qué plataforma puedes encontrar su canal de videos?",
-          answers: ["Netflix", "YouTube", "Twitch exclusivamente", "Disney+"],
-          correct: 1
-        },
-        {
-          question: "¿Dónde se anunciará la información sobre futuros eventos?",
-          answers: [
-            "En anuncios oficiales de sus redes sociales",
-            "En una página de apuestas",
-            "En una cuenta desconocida",
-            "No se publicará información"
-          ],
-          correct: 0
-        },
-        {
-          question: "¿Qué representa el trébol en la identidad de Leviz PG?",
-          answers: [
-            "Una marca de automóviles",
-            "Un equipo deportivo",
-            "Un símbolo conectado con su lema e identidad",
-            "El nombre de un álbum confirmado"
-          ],
-          correct: 2
-        }
-      ];
-
-      const game = document.getElementById("quizGame");
-      const result = document.getElementById("quizResult");
-      const questionCounter = document.getElementById("questionCounter");
-      const scoreCounter = document.getElementById("scoreCounter");
-      const progressBar = document.getElementById("quizProgressBar");
-      const questionText = document.getElementById("questionText");
-      const answerOptions = document.getElementById("answerOptions");
-      const feedback = document.getElementById("quizFeedback");
-      const nextButton = document.getElementById("nextQuestion");
-      const restartButton = document.getElementById("restartQuiz");
-      const resultTitle = document.getElementById("resultTitle");
-      const resultMessage = document.getElementById("resultMessage");
-      const finalScore = document.getElementById("finalScore");
-
-      let currentQuestion = 0;
-      let score = 0;
-      let answered = false;
-
-      function renderQuestion() {
-        answered = false;
-        const q = questions[currentQuestion];
-
-        questionCounter.textContent = `Pregunta ${currentQuestion + 1} de ${questions.length}`;
-        scoreCounter.textContent = `Aciertos: ${score}`;
-        progressBar.style.width = `${(currentQuestion / questions.length) * 100}%`;
-        questionText.textContent = q.question;
-        feedback.textContent = "Selecciona tu respuesta.";
-        nextButton.hidden = true;
-        answerOptions.innerHTML = "";
-
-        q.answers.forEach((answer, index) => {
-          const button = document.createElement("button");
-          button.type = "button";
-          button.className = "answer-option";
-          button.textContent = answer;
-          button.addEventListener("click", () => chooseAnswer(index));
-          answerOptions.appendChild(button);
-        });
+        buttons[selectedIndex].classList.add("wrong");
+        buttons[item.correct].classList.add("correct");
+        quizFeedback.textContent = "No exactamente. ¡Ya tienes el dato correcto!";
       }
 
-      function chooseAnswer(index) {
-        if (answered) return;
-        answered = true;
+      progressFill.style.width = `${((questionIndex + 1) / quizQuestions.length) * 100}%`;
+      nextButton.disabled = false;
+    }
 
-        const q = questions[currentQuestion];
-        const options = answerOptions.querySelectorAll("button");
+    function finishQuiz() {
+      quizGame.hidden = true;
+      quizResult.hidden = false;
+      document.getElementById("resultNumber").textContent = `${score}/${quizQuestions.length}`;
 
-        options.forEach((button, i) => {
-          button.disabled = true;
+      let title;
+      let message;
 
-          if (i === q.correct) {
-            button.classList.add("correct");
-          } else if (i === index) {
-            button.classList.add("wrong");
-          }
-        });
-
-        if (index === q.correct) {
-          score++;
-          feedback.textContent = "¡Correcto! Conoces bien la historia. ✦";
-        } else {
-          feedback.textContent = `No exactamente. La respuesta correcta es: ${q.answers[q.correct]}.`;
-        }
-
-        scoreCounter.textContent = `Aciertos: ${score}`;
-        nextButton.textContent = currentQuestion === questions.length - 1
-          ? "Ver resultado ↗"
-          : "Siguiente →";
-        nextButton.hidden = false;
+      if (score >= 9) {
+        title = "Leyenda del trébol.";
+        message = "¡Impresionante! Conoces casi toda la historia de Leviz.";
+      } else if (score >= 7) {
+        title = "Vas por buen camino.";
+        message = "Tienes buena memoria. Sigue sus redes para conocer cada nuevo capítulo.";
+      } else if (score >= 4) {
+        title = "El camino acaba de empezar.";
+        message = "Ya conoces algunos detalles. Repasa su historia y vuelve a intentarlo.";
+      } else {
+        title = "Todavía queda historia por descubrir.";
+        message = "Date una vuelta por la página, conoce su historia y prueba de nuevo.";
       }
 
-      function showResult() {
-        game.hidden = true;
-        result.hidden = false;
-        progressBar.style.width = "100%";
-        finalScore.textContent = `${score}/${questions.length}`;
+      document.getElementById("resultTitle").textContent = title;
+      document.getElementById("resultText").textContent = message;
+      progressFill.style.width = "100%";
+    }
 
-        if (score === 10) {
-          resultTitle.textContent = "¡Nivel leyenda! 🍀";
-          resultMessage.textContent = "¡Perfecto! Has acertado todas las preguntas.";
-        } else if (score >= 7) {
-          resultTitle.textContent = "¡Eres parte del movimiento!";
-          resultMessage.textContent = "Conoces bastante sobre Leviz. ¡Sigue apoyando su música!";
-        } else if (score >= 4) {
-          resultTitle.textContent = "Vas por buen camino.";
-          resultMessage.textContent = "Explora la página otra vez y prueba cuánto puedes mejorar.";
-        } else {
-          resultTitle.textContent = "¡Esto acaba de empezar!";
-          resultMessage.textContent = "Descubre la historia y las redes de Leviz y vuelve a intentarlo.";
-        }
-      }
+    nextButton.addEventListener("click", () => {
+      if (!answered) return;
 
-      nextButton.addEventListener("click", () => {
-        if (!answered) return;
-
-        currentQuestion++;
-
-        if (currentQuestion >= questions.length) {
-          showResult();
-        } else {
-          renderQuestion();
-        }
-      });
-
-      restartButton.addEventListener("click", () => {
-        currentQuestion = 0;
-        score = 0;
-        answered = false;
-        result.hidden = true;
-        game.hidden = false;
+      if (questionIndex < quizQuestions.length - 1) {
+        questionIndex++;
         renderQuestion();
-      });
+      } else {
+        finishQuiz();
+      }
+    });
 
+    document.getElementById("restartQuiz").addEventListener("click", () => {
+      questionIndex = 0;
+      score = 0;
+      answered = false;
+      quizResult.hidden = true;
+      quizGame.hidden = false;
       renderQuestion();
-    })();
+    });
+
+    renderQuestion();
   </script>
 </body>
 </html>
